@@ -1,0 +1,211 @@
+/* 主题色变量层（对齐 VS Code 平台主题服务的 CSS 变量命名与取值）。
+ *
+ * 变量名沿用 VS Code 的 `--vscode-<token>` 形式（token 中的 `.` 替换为 `-`），
+ * 取值来自 extensions/theme-defaults/themes/2026-dark.json —— 即 VS Code 当前的
+ * 默认深色主题 "Dark 2026"（其 include 链为 2026-dark.json → dark_modern.json →
+ * dark_plus.json → dark_vs.json，见各文件头部 settings id：
+ * workbenchThemeService.ts 的 ThemeSettingDefaults.COLOR_THEME_DARK = 'Dark 2026'）；
+ * 主题未覆盖的 token 取 registerColor 的 dark 默认值（平台 theme 服务在主题未覆盖时
+ * 使用，位置见每处注释）。组件样式因此可以直接照搬 workbench 的 CSS。
+ *
+ * Dark 2026 的特点：工作台立面统一为 #191A1B（标题栏/活动栏/侧栏/面板/状态栏同色），
+ * 编辑器与活动标签为 #121314，强调色为 #3994BC（青蓝，仅用于焦点边框、选中下划线
+ * 等 1px 强调位），不作为任何一块立面背景——底部状态栏因此不再出现整条蓝色。
+ *
+ * 注：此处固定为 Dark 2026，后续接入主题服务时只需替换这一层。 */
+
+:root {
+    /* 基础（2026-dark.json） */
+    --vscode-foreground: #bfbfbf;
+    --vscode-descriptionForeground: #8c8c8c;
+    --vscode-disabledForeground: #555555;
+    --vscode-icon-foreground: #8c8c8c;
+    --vscode-focusBorder: #3994bcb3;
+    --vscode-errorForeground: #f48771;
+    --vscode-widget-border: #2a2b2c;
+    /* 浮层抬升阴影（workbench/browser/media/style.css 的 Elevation shadows，
+     * shadow-md 用于标题栏与活动栏这类紧贴表面的部件，shadow-lg 用于 hover / 浮层） */
+    --vscode-shadow-md: 0 0 6px rgba(0, 0, 0, 0.08);
+    --vscode-shadow-lg: 0 0 12px rgba(0, 0, 0, 0.14);
+    /* 圆角与描边宽度（platform/theme/common/sizes/baseSizes.ts：
+     * cornerRadius.medium = 6px、cornerRadius.large = 8px、strokeThickness = 1px） */
+    --vscode-cornerRadius-medium: 6px;
+    --vscode-cornerRadius-large: 8px;
+    --vscode-strokeThickness: 1px;
+
+    /* 活动栏（2026-dark.json） */
+    --vscode-activityBar-background: #191a1b;
+    --vscode-activityBar-foreground: #bfbfbf;
+    --vscode-activityBar-inactiveForeground: #8c8c8c;
+    --vscode-activityBar-activeBorder: #bfbfbf;
+    --vscode-activityBar-border: #2a2b2c;
+    --vscode-activityBarBadge-background: #307e9f;
+    --vscode-activityBarBadge-foreground: #ffffff;
+
+    /* 侧栏（2026-dark.json） */
+    --vscode-sideBar-background: #191a1b;
+    --vscode-sideBar-foreground: #bfbfbf;
+    --vscode-sideBar-border: #2a2b2c;
+    --vscode-sideBarTitle-foreground: #bfbfbf;
+    --vscode-sideBarSectionHeader-background: #191a1b;
+    --vscode-sideBarSectionHeader-foreground: #bfbfbf;
+    --vscode-sideBarSectionHeader-border: #2a2b2c;
+
+    /* 列表 / 树（2026-dark.json；tree.indentGuidesStroke 主题未覆盖，
+       取 platform/theme/common/colors/listColors.ts 的 dark 默认值 #585858） */
+    --vscode-list-hoverBackground: #ffffff14;
+    --vscode-list-hoverForeground: #bfbfbf;
+    --vscode-list-activeSelectionBackground: #ffffff22;
+    --vscode-list-activeSelectionForeground: #ededed;
+    --vscode-list-inactiveSelectionBackground: #2c2d2e;
+    --vscode-list-focusOutline: #3994bcb3;
+    --vscode-list-highlightForeground: #48a0c7;
+    --vscode-tree-indentGuidesStroke: #585858;
+
+    /* 编辑器 / 标签页（2026-dark.json） */
+    --vscode-editor-background: #121314;
+    --vscode-editor-foreground: #bbbebf;
+    --vscode-editorGroup-border: #ffffff17;
+    --vscode-editorGroupHeader-tabsBackground: #191a1b;
+    --vscode-editorGroupHeader-tabsBorder: #2a2b2c;
+    --vscode-tab-activeBackground: #121314;
+    --vscode-tab-unfocusedActiveBackground: #121314;
+    --vscode-tab-inactiveBackground: #191a1b;
+    --vscode-tab-unfocusedInactiveBackground: #191a1b;
+    --vscode-tab-activeForeground: #bfbfbf;
+    --vscode-tab-inactiveForeground: #8c8c8c;
+    --vscode-tab-unfocusedActiveForeground: #8c8c8c;
+    --vscode-tab-unfocusedInactiveForeground: #444444;
+    --vscode-tab-selectedBackground: #37373d;
+    --vscode-tab-selectedForeground: #ffffff;
+    --vscode-tab-selectedBorderTop: #6caddf;
+    --vscode-tab-border: #2a2b2c;
+    --vscode-tab-lastPinnedBorder: #2a2b2c;
+    --vscode-tab-activeBorderTop: #3994bc;
+    /* workbench/common/theme.ts TAB_ACTIVE_MODIFIED_BORDER dark = #3399CC，
+       TAB_INACTIVE_MODIFIED_BORDER = transparent(前者, .5) */
+    --vscode-tab-activeModifiedBorder: #3399cc;
+    --vscode-tab-inactiveModifiedBorder: #3399cc80;
+    /* workbench/common/theme.ts TAB_DRAG_AND_DROP_BORDER dark = TAB_ACTIVE_FOREGROUND */
+    --vscode-tab-dragAndDropBorder: #bfbfbf;
+
+    /* 标题栏 / 菜单栏（2026-dark.json） */
+    --vscode-titleBar-activeBackground: #191a1b;
+    --vscode-titleBar-activeForeground: #8c8c8c;
+    --vscode-titleBar-border: #2a2b2c;
+    --vscode-menubar-selectionForeground: #bfbfbf;
+    --vscode-menubar-selectionBackground: #242526;
+
+    /* 状态栏（2026-dark.json：与面板同为 #191A1B，强调色只出现在焦点边框等 1px 处） */
+    --vscode-statusBar-background: #191a1b;
+    --vscode-statusBar-foreground: #8c8c8c;
+    --vscode-statusBar-border: #2a2b2c;
+    --vscode-statusBar-focusBorder: #3994bcb3;
+    --vscode-statusBarItem-hoverBackground: #323233;
+    --vscode-statusBarItem-hoverForeground: #ffffff;
+    --vscode-statusBarItem-activeBackground: #4b4c4d;
+    --vscode-statusBarItem-focusBorder: #3994bcb3;
+    /* workbench/common/theme.ts STATUS_BAR_ITEM_COMPACT_HOVER_BACKGROUND dark = white.transparent(.12) */
+    --vscode-statusBarItem-compactHoverBackground: #ffffff1f;
+    --vscode-statusBarItem-remoteBackground: #0078d4;
+    --vscode-statusBarItem-remoteForeground: #ffffff;
+    /* 以下 hover 值 = STATUS_BAR_ITEM_HOVER_BACKGROUND / _FOREGROUND（2026-dark.json） */
+    --vscode-statusBarItem-remoteHoverBackground: #323233;
+    --vscode-statusBarItem-remoteHoverForeground: #ffffff;
+    --vscode-statusBarItem-prominentBackground: #3994bc;
+    --vscode-statusBarItem-prominentForeground: #ffffff;
+    --vscode-statusBarItem-prominentHoverBackground: #3994bc;
+    --vscode-statusBarItem-prominentHoverForeground: #ffffff;
+    /* error/warning 背景为派生值（workbench/common/theme.ts STATUS_BAR_ERROR/WARNING_ITEM_BACKGROUND）：
+       darken(errorForeground #f48771, .4) / darken(editorWarning.foreground #cca700, .4)，
+       按 base/common/color.ts 的 HSL darken 计算；当前没有条目使用这两个 kind，仅保留令牌备用。 */
+    --vscode-statusBarItem-errorBackground: #c72e0f;
+    --vscode-statusBarItem-errorForeground: #ffffff;
+    --vscode-statusBarItem-errorHoverBackground: #323233;
+    --vscode-statusBarItem-errorHoverForeground: #ffffff;
+    --vscode-statusBarItem-warningBackground: #7a6400;
+    --vscode-statusBarItem-warningForeground: #ffffff;
+    --vscode-statusBarItem-warningHoverBackground: #323233;
+    --vscode-statusBarItem-warningHoverForeground: #ffffff;
+    --vscode-statusBarItem-offlineBackground: #6c1717;
+    --vscode-statusBarItem-offlineForeground: #ffffff;
+    --vscode-statusBarItem-offlineHoverBackground: #323233;
+    --vscode-statusBarItem-offlineHoverForeground: #ffffff;
+
+    /* 面板（2026-dark.json；panel.dropBorder 主题未覆盖，
+       取 workbench/common/theme.ts PANEL_DRAG_AND_DROP_BORDER = PANEL_ACTIVE_TITLE_FOREGROUND） */
+    --vscode-panel-background: #191a1b;
+    --vscode-panel-border: #2a2b2c;
+    --vscode-panel-dropBorder: #bfbfbf;
+    --vscode-panelTitle-activeForeground: #bfbfbf;
+    --vscode-panelTitle-inactiveForeground: #8c8c8c;
+    --vscode-panelTitle-activeBorder: #3994bc;
+    /* workbench/common/theme.ts PANEL_TITLE_BADGE_* = ACTIVITY_BAR_BADGE_* */
+    --vscode-panelTitleBadge-background: #307e9f;
+    --vscode-panelTitleBadge-foreground: #ffffff;
+    --vscode-panelInput-border: #2b2b2b;
+
+    /* 布局分隔条（platform/theme/common/colors/miscColors.ts sash.hoverBorder = focusBorder） */
+    --vscode-sash-hoverBorder: #3994bcb3;
+
+    /* 输入框（2026-dark.json） */
+    --vscode-input-background: #191a1b;
+    --vscode-input-foreground: #bfbfbf;
+    --vscode-input-border: #333536;
+    --vscode-input-placeholderForeground: #555555;
+    --vscode-inputOption-activeBackground: #313233;
+    --vscode-inputOption-activeForeground: #bfbfbf;
+    --vscode-inputOption-activeBorder: #2a2b2c;
+
+    /* 下拉框（2026-dark.json） */
+    --vscode-dropdown-background: #191a1b;
+    --vscode-dropdown-foreground: #bfbfbf;
+    --vscode-dropdown-border: #333536;
+
+    /* 菜单 / 浮层（2026-dark.json） */
+    --vscode-menu-background: #202122;
+    --vscode-menu-foreground: #bfbfbf;
+    --vscode-menu-border: #2a2b2c;
+    --vscode-menu-separatorBackground: #2a2b2c;
+    --vscode-menu-selectionBackground: #3994bc26;
+    --vscode-menu-selectionForeground: #bfbfbf;
+    /* 键盘导航时的菜单项描边（2026-dark.json；指针 hover 态由 :focus-visible 规则抑制） */
+    --vscode-menu-selectionBorder: #3994bc;
+    --vscode-editorWidget-background: #202122;
+    --vscode-editorWidget-border: #2a2b2c;
+
+    /* 工具栏（platform/theme/common/colors/editorColors.ts toolbar.hoverBackground dark = #5a5d5e50；
+       actionBar.toggledBackground 见 2026-dark.json） */
+    --vscode-toolbar-hoverBackground: #5a5d5e50;
+    --vscode-actionBar-toggledBackground: #383a49;
+
+    /* 徽标（2026-dark.json） */
+    --vscode-badge-background: #307e9f;
+    --vscode-badge-foreground: #ffffff;
+
+    /* 搜索结果高亮（2026-dark.json） */
+    --vscode-editor-findMatchHighlightBackground: #27678280;
+    --vscode-editor-findMatchBackground: #27678290;
+
+    /* 滚动条（2026-dark.json） */
+    --vscode-scrollbarSlider-background: #a8a9aa85;
+    --vscode-scrollbarSlider-hoverBackground: #a8a9aa90;
+    --vscode-scrollbarSlider-activeBackground: #a8a9aa9c;
+
+    /* 布局尺寸 */
+    --vscode-activityBar-width: 48px;
+    --vscode-activityBar-itemSize: 48px;
+    --vscode-activityBar-iconSize: 24px;
+    --vscode-paneHeader-height: 22px;
+    --vscode-tab-height: 35px;
+    --vscode-titleBar-height: 35px;
+    --vscode-statusBar-height: 22px;
+    /* 面板标题栏高度与 part.css 的 .part > .title 一致；sash 尺寸对齐 gridview 的 4px 分隔条。
+       侧栏宽度不是主题 token（上游由 grid 设部件尺寸），存在 appState.sidebarWidth。 */
+    --vscode-panelHeader-height: 35px;
+    --vscode-sash-size: 4px;
+    --vscode-sash-hover-size: 4px;
+    /* 立面阴影（对齐 workbench/browser/media/style.css 的 .monaco-workbench 设计 token） */
+    --vscode-shadow-sm: 0 0 4px rgba(0, 0, 0, 0.08);
+    --vscode-shadow-active-tab: 0 8px 12px rgba(0, 0, 0, 0.02);
+}

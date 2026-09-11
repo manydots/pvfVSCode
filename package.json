@@ -1,0 +1,25 @@
+{
+  "name": "pvf-vscode",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Monaco编辑器内核",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write --experimental-cli src/"
+  },
+  "dependencies": {
+    "monaco-editor": "^0.56.0",
+    "vue": "^3.5.42"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.4",
+    "prettier": "3.9.6",
+    "vite": "^6.4.3"
+  },
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  }
+}

@@ -1,0 +1,47 @@
+# pvfVSCode 自动发布：推送到 main 即构建并部署到 GitHub Pages。
+#
+# 结构对齐参考项目 launch-helper/.github/workflows/deploy.yml：
+# build（安装依赖 → 构建 → 上传 dist 产物）+ deploy（发布 Pages）两段式，
+# 同一时刻只允许一次发布（concurrency: pages）。
+# 差异：本项目没有网关与认证，构建态与生产态没有区别，因此直接执行 `yarn build`，
+# 不需要 launch-helper 中为关闭网关认证而设的 `yarn workflow`（`vite build --mode workflow`）。
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 20
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
