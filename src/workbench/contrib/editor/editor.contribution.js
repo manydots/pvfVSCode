@@ -163,16 +163,11 @@ appendMenuItem(MenuId.EditorTitleContext, {
 
 // 标签栏右侧「…」溢出菜单（非 navigation 组自动进入溢出面板）；
 // 复用 defaultMenus 中已注册的命令，因此快捷键提示无需重复声明。
-appendMenuItem(MenuId.EditorTitle, {
-    command: { id: "editor.action.toggleWordWrap", title: "切换自动换行", icon: "word-wrap" },
-    group: "9_other",
-    order: 1
-});
-appendMenuItem(MenuId.EditorTitle, {
-    command: { id: "editor.action.toggleMinimap", title: "切换缩略图", icon: "map" },
-    group: "9_other",
-    order: 2
-});
+// 注意：声明了 toggled 的命令（「切换自动换行」「切换缩略图」）不在此处落点 ——
+// toggled 属于命令描述符，只有 registerAction2 会把它展开进落点
+// （platform/actions/common/actions.ts:741-751；勾选态取值见 menuService.ts:240），
+// 这里手写的描述符不带 toggled，会让溢出菜单里的勾选态与「视图」菜单不一致。
+// 它们的落点写在各自动作的 menu 数组里（src/menu/defaultMenus.js）。
 appendMenuItem(MenuId.EditorTitle, {
     command: { id: "editor.action.formatDocument", title: "格式化文档", icon: "symbol-file" },
     group: "9_other",

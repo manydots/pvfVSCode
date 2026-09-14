@@ -12,6 +12,7 @@ import { MenuId } from "@/menu/menuId.js";
 import { executeCommand } from "@/menu/commands.js";
 import { getViews } from "@/workbench/viewsRegistry.js";
 import { getActivePanelViewContainer, getPanelViewContainers, getViewTitleActions, showPanelContainer } from "@/workbench/viewService.js";
+import { PANEL_MIN_HEIGHT, clampPanelHeight } from "@/workbench/browser/partDimensions.js";
 import Toolbar from "@/base/toolbar/Toolbar.vue";
 import MenuToolbar from "@/components/MenuToolbar.vue";
 import Sash from "@/base/sash/Sash.vue";
@@ -48,12 +49,12 @@ function runViewAction(action) {
     action.run?.();
 }
 
-// 面板高度拖拽（对齐 VS Code grid 的 sash 行为：向上拖动增高，最小高度 77px，
-// 最大不超过可用高度，拖动时自动取消最大化）。分隔条本体复用 base/sash/Sash.vue。
-const MIN_HEIGHT = 77;
+// 面板高度拖拽（对齐 VS Code grid 的 sash 行为：向上拖动增高，拖动时自动取消最大化）。
+// 高度约束与夹取见 workbench/browser/partDimensions.js（最小 77 的出处写在文件里），
+// 与「启动恢复已存高度」共用同一份规则。分隔条本体复用 base/sash/Sash.vue。
 let dragStart = null;
 
-const sashState = computed(() => (appState.panelHeight <= MIN_HEIGHT ? "minimum" : "enabled"));
+const sashState = computed(() => (appState.panelHeight <= PANEL_MIN_HEIGHT ? "minimum" : "enabled"));
 
 function onSashStart(event) {
     appState.panelMaximized = false;
@@ -63,8 +64,7 @@ function onSashStart(event) {
 function onSashChange(event) {
     if (!dragStart) return;
     const next = dragStart.height - (event.currentY - dragStart.y);
-    const maxHeight = Math.max(MIN_HEIGHT, window.innerHeight - 64);
-    appState.panelHeight = Math.min(maxHeight, Math.max(MIN_HEIGHT, next));
+    appState.panelHeight = clampPanelHeight(next, window.innerHeight);
 }
 
 function onSashEnd() {

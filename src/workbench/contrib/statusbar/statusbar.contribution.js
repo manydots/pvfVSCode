@@ -9,21 +9,15 @@ import { registerAction2 } from "@/menu/actions.js";
 import { ContextKeyExpr, contextKeys } from "@/menu/contextKey.js";
 import { appState, setStatus } from "@/menu/appState.js";
 import { monaco } from "@/monaco/setup.js";
+import { getLanguageName } from "@/monaco/languageNames.js";
 import { getActiveEditorInput, getEditorIcon, getModel } from "@/workbench/contrib/editor/editorGroupService.js";
+import { SUPPORTED_ENCODINGS } from "@/workbench/services/textfile/common/encoding.js";
 import { StatusbarAlignment, addEntry } from "@/workbench/contrib/statusbar/statusbarService.js";
 import { showPanelContainer } from "@/workbench/viewService.js";
 import { OUTPUT_CONTAINER_ID, PROBLEMS_CONTAINER_ID } from "@/workbench/contrib/panel/panel.contribution.js";
 
-// 语言 id -> 显示名（对齐 VS Code languageService.getLanguageName 的作用；
-// 裁剪客户端只保留已接入的语言，未命中时回退为语言 id 本身）。
-const LANGUAGE_NAMES = {
-    plaintext: "纯文本",
-    json: "JSON",
-    jsonc: "JSON with Comments",
-    javascript: "JavaScript",
-    typescript: "TypeScript",
-    markdown: "Markdown"
-};
+// 语言显示名取自语言注册表（getLanguageName，对齐 editorStatus.ts 的用法），
+// 不再维护本地「id → 名称」映射表 —— 见 monaco/languageNames.js。
 
 const RIGHT = StatusbarAlignment.RIGHT;
 const LEFT = StatusbarAlignment.LEFT;
@@ -84,15 +78,20 @@ function updateEditorEntries() {
     const indentationText = active.insertSpaces ? `空格: ${active.tabSize}` : `制表符: ${active.tabSize}`;
     indentationEntry.update({ text: indentationText, ariaLabel: indentationText });
 
-    const encodingText = active.encoding.toUpperCase();
+    // 编码（editorStatus.ts:900-906）：先按 raw id 查 SUPPORTED_ENCODINGS 取 labelShort，
+    // 查不到才原样显示 —— 与权威的 `encodingInfo ? labelShort : rawEncoding` 一致。
+    const rawEncoding = active.encoding;
+    const encodingInfo = typeof rawEncoding === "string" ? SUPPORTED_ENCODINGS[rawEncoding] : undefined;
+    const encodingText = encodingInfo ? encodingInfo.labelShort : rawEncoding;
     encodingEntry.update({ text: encodingText, ariaLabel: encodingText });
 
     // 行尾序列（editorStatus.ts:342-343 的 nlsEOLLF / nlsEOLCRLF）。
     const eolText = active.eol === "\r\n" ? "CRLF" : "LF";
     eolEntry.update({ text: eolText, ariaLabel: eolText });
 
-    // 语言模式：图标 + 名称（截图中的 `{ } JSON` 形式，图标取自编辑器语言图标映射）。
-    const languageName = LANGUAGE_NAMES[active.languageId] ?? active.languageId;
+    // 语言模式：图标 + 名称（截图中的 `{ } JSON` 形式，名称取自语言注册表、
+    // 图标取自编辑器语言图标映射）。
+    const languageName = getLanguageName(active.languageId);
     const languageText = `$(${getEditorIcon(active)}) ${languageName}`;
     languageEntry.update({ text: languageText, ariaLabel: languageName, tooltip: "选择语言模式" });
 }
