@@ -9,12 +9,19 @@ import { monaco } from "@/monaco/setup.js";
 import { appState } from "@/menu/appState.js";
 import { contextKeys } from "@/menu/contextKey.js";
 import EditorTabs from "@/workbench/contrib/editor/EditorTabs.vue";
+import EditorBreadcrumbs from "@/workbench/contrib/editor/EditorBreadcrumbs.vue";
 import { attachEditorPane, detachEditorPane, editorGroup, getActiveEditorInput } from "@/workbench/contrib/editor/editorGroupService.js";
+import { applyWordWrapState, refreshWordWrapContextKeys } from "@/workbench/contrib/codeEditor/wordWrapState.js";
+import { configurationService } from "@/workbench/services/configuration/browser/configurationService.js";
 
 const host = ref(null);
 const pane = shallowRef(null);
 
 const isEmpty = computed(() => editorGroup.editors.length === 0);
+
+// 编辑器的两个设置项 id（注册见 src/monaco/editorConfiguration.js）。
+const WORD_WRAP_SETTING = "editor.wordWrap";
+const MINIMAP_ENABLED_SETTING = "editor.minimap.enabled";
 
 onMounted(() => {
     const instance = monaco.editor.create(host.value, {
@@ -23,26 +30,102 @@ onMounted(() => {
         automaticLayout: true,
         fontSize: 13,
         fontFamily: "Menlo, Monaco, 'Courier New', monospace",
-        minimap: { enabled: appState.minimap },
-        wordWrap: appState.wordWrap ? "on" : "off",
+        // 缩略图初值取配置（editor.minimap.enabled 默认 true，editorOptions.ts:3495-3499）
+        minimap: { enabled: configurationService.getValue(MINIMAP_ENABLED_SETTING) },
+        // 换行初值取配置（editor.wordWrap 默认 'off'，editorOptions.ts:6846-6872）；
+        // 某个模型被切换过换行后，其覆盖由下面的 syncWordWrap 以 wordWrapOverride2 施加。
+        wordWrap: configurationService.getValue(WORD_WRAP_SETTING),
         scrollBeyondLastLine: false,
         renderLineHighlight: "line",
-        tabSize: 4
+        tabSize: 4,
+        // 粘性滚动：滚动时在代码区顶部固定「当前作用域」（面包屑跟随光标，滚动这件事由它承担）。
+        // 取值与 VS Code 默认完全相同（editor/common/config/editorOptions.ts:3190 的
+        // EditorStickyScroll defaults：enabled / maxLineCount / defaultModel / scrollWithEditor），
+        // monaco 发行包默认值见 esm/vs/editor/common/config/editorOptions.js:1382。
+        // 这里显式写出而非依赖默认值：该部件的可见性完全由这组取值决定 ——
+        // defaultModel 决定取数层（stickyScrollModelProvider.js:47 的分支），
+        // maxLineCount 与可视行数 25% 取小（stickyScrollController.js:465-534）。
+        stickyScroll: { enabled: true, maxLineCount: 5, defaultModel: "outlineModel", scrollWithEditor: true }
     });
     pane.value = instance;
     attachEditorPane(instance);
 
-    instance.onDidFocusEditorText(() => contextKeys.set("editorFocus", true));
-    instance.onDidBlurEditorText(() => contextKeys.set("editorFocus", false));
+    const disposables = [];
 
-    // 编辑器自身处理的选项类按键（如 Monaco 原生的 Alt+Z 切换换行）会把结果直接写入编辑器，
-    // 这里回写 appState，保证菜单勾选态与编辑器实际状态一致。
-    instance.onDidChangeConfiguration(event => {
-        if (event.hasChanged(monaco.editor.EditorOption.wordWrap)) {
-            appState.wordWrap = instance.getOption(monaco.editor.EditorOption.wordWrap) !== "off";
+    disposables.push(instance.onDidFocusEditorText(() => contextKeys.set("editorFocus", true)));
+    disposables.push(instance.onDidBlurEditorText(() => contextKeys.set("editorFocus", false)));
+
+    // ---- 自动换行：触发源与权威 toggleWordWrap.ts 的 ToggleWordWrapController 一致 ----
+    // 覆盖状态按模型存放，切换模型或选项变化时重新施加（:134 onDidChangeModel、:116-131
+    // onDidChangeConfiguration(wrappingInfo)）；currentlyApplyingEditorConfig 用于区分
+    // 「自己改的」与外部改的，避免自触发回环（:115、:126-130）。
+    let currentlyApplyingEditorConfig = false;
+
+    function syncWordWrap() {
+        if (!instance.getModel()) return;
+        try {
+            currentlyApplyingEditorConfig = true;
+            applyWordWrapState(instance, instance.getModel());
+        } finally {
+            currentlyApplyingEditorConfig = false;
+        }
+    }
+
+    disposables.push(
+        instance.onDidChangeConfiguration(event => {
+            if (!event.hasChanged(monaco.editor.EditorOption.wrappingInfo)) return;
+            // isWordWrapMinified / isDominatedByLongLines 由 wrappingInfo 求出（:120-125）
+            refreshWordWrapContextKeys(instance);
+            // 不是自己引起的换行变化时，重新施加该模型的覆盖状态（:126-130）
+            if (!currentlyApplyingEditorConfig) syncWordWrap();
+        })
+    );
+    disposables.push(
+        instance.onDidChangeModel(() => {
+            // 切换模型后重新施加该模型的覆盖状态，并按新模型的实际换行重算上下文键
+            // （toggleWordWrap.ts:134 的 controller 分支 + :286 的 tracker 分支）。
+            // 覆盖状态为 null 时 applyWordWrapState 写 'inherit'：若原本已是 'inherit'
+            // 不会触发变更事件，因此上下文键必须在这里显式刷新。
+            syncWordWrap();
+            refreshWordWrapContextKeys(instance);
+        })
+    );
+    // 窗口焦点变化时重算 canToggleWordWrap / editorWordWrap
+    // （EditorWordWrapContextKeyTracker 的 window focus/blur 监听，:245-249）
+    const onWindowFocusChange = () => refreshWordWrapContextKeys(instance);
+    globalThis.window?.addEventListener("focus", onWindowFocusChange, true);
+    globalThis.window?.addEventListener("blur", onWindowFocusChange, true);
+    disposables.push({
+        dispose() {
+            globalThis.window?.removeEventListener("focus", onWindowFocusChange, true);
+            globalThis.window?.removeEventListener("blur", onWindowFocusChange, true);
         }
     });
+
+    // ---- 设置项变化落到编辑器部件 ----
+    disposables.push(
+        configurationService.onDidChangeConfiguration(event => {
+            if (event.affectsConfiguration(MINIMAP_ENABLED_SETTING)) {
+                instance.updateOptions({ minimap: { enabled: configurationService.getValue(MINIMAP_ENABLED_SETTING) } });
+            }
+            // 换行设置是 base 值：无覆盖的模型直接跟着变，有覆盖的模型由上面的
+            // wrappingInfo 监听重新施加覆盖（override2 优先于 wordWrap）。
+            if (event.affectsConfiguration(WORD_WRAP_SETTING)) {
+                instance.updateOptions({ wordWrap: configurationService.getValue(WORD_WRAP_SETTING) });
+            }
+        })
+    );
+
+    // 首个模型的覆盖状态与上下文键（模型可能是在部件创建前打开的）
+    syncWordWrap();
+    refreshWordWrapContextKeys(instance);
+
+    mountedDisposables.push(...disposables);
 });
+
+// 部件创建期注册的监听：卸载时统一撤销（Monaco 部件自身的 onDid* 监听随 dispose() 一起释放，
+// 但配置服务与 window 上的监听不属于编辑器实例，必须显式撤销）。
+const mountedDisposables = [];
 
 // 选区长度变化时同步上下文键，供菜单项的 precondition（如剪切/复制）求值。
 watch(
@@ -50,15 +133,24 @@ watch(
     length => contextKeys.set("editorHasSelection", length > 0)
 );
 
-// 观察选项类命令对 appState 的改动，应用到唯一的编辑器部件。
+// 部件尺寸变化后同步重排编辑器（对齐 VS Code 的布局语义：grid 布局完成后立即调用
+// editor.layout()，见 workbench/browser/layout.ts 的 WorkbenchLayout 与
+// editorPart.ts 的 layout()）。
+//
+// 为什么不能只靠 Monaco 的 automaticLayout：它内部用 ResizeObserver（elementSizeObserver.js），
+// 回调落在渲染帧的 layout 阶段之后；而 minimap 的 canvas 是在 _applyLayout 里被改写
+// width/height 清空的（minimap.js:1082-1093），重绘要等编辑器 render loop 的下一帧 ——
+// 持续拖拽侧栏/面板时每一帧都先清空、后重绘，缩略图表现为不断闪烁。
+// 在 Vue 的 post-flush（DOM 已更新、仍在同一任务内）同步 layout()，清空与重绘落在同一帧。
+// automaticLayout 保留为兜底：同步 layout 已把尺寸记入 ElementSizeObserver，它随后不会重复触发。
 watch(
-    () => [appState.wordWrap, appState.minimap],
-    ([wordWrap, minimap]) => {
-        pane.value?.updateOptions({ wordWrap: wordWrap ? "on" : "off", minimap: { enabled: minimap } });
-    }
+    () => [appState.sidebarWidth, appState.sidebarVisible, appState.panelHeight, appState.panelVisible, appState.panelMaximized, appState.statusBarVisible],
+    () => pane.value?.layout(),
+    { flush: "post" }
 );
 
 onBeforeUnmount(() => {
+    for (const disposable of mountedDisposables.splice(0)) disposable.dispose?.();
     detachEditorPane();
     pane.value?.dispose();
 });
@@ -69,6 +161,9 @@ onBeforeUnmount(() => {
         <div class="editor-group-container" :class="{ active: !isEmpty }">
             <div class="title">
                 <EditorTabs />
+                <!-- 面包屑位于标签栏下方同一 .title 容器内（对齐 editorTitleControl.ts 的
+                     .breadcrumbs-below-tabs，布局取值见 media/editortitlecontrol.css:6-12） -->
+                <EditorBreadcrumbs />
             </div>
             <div class="editor-host" ref="host"></div>
             <div v-if="isEmpty" class="editor-group-watermark">
