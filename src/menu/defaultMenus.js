@@ -7,10 +7,9 @@ import { MenuId } from "@/menu/menuId.js";
 import { appendMenuItem, registerAction2 } from "@/menu/actions.js";
 import { ContextKeyExpr, contextKeys } from "@/menu/contextKey.js";
 import { appState, setStatus } from "@/menu/appState.js";
-import { triggerEditorAction, updateEditorOptions } from "@/menu/editorService.js";
+import { triggerEditorAction } from "@/menu/editorService.js";
 import { openEditor } from "@/workbench/contrib/editor/editorGroupService.js";
-import { WELCOME_TEXT } from "@/welcome.js";
-import { DEFAULT_PREVIEW_FILE } from "@/defaultPreview.js";
+import { DEFAULT_PREVIEW_FILE, WELCOME_FILE } from "@/builtInFiles.js";
 
 // 编辑器类命令：转发 Monaco 内置动作（EditorAction id）。
 // 标记为编辑器作用域：快捷键分发时要求 editorFocus（对齐 VS Code 编辑器命令的 when: editorFocus），
@@ -25,22 +24,29 @@ function editorAction(actionId) {
 function addMenubarItem(title, submenu, order) {
     appendMenuItem(MenuId.MenubarMainMenu, { title, submenu, order });
 }
+// 顶级项 order 取自 VS Code workbench/browser/parts/titlebar/menubar.contribution.ts
+// （File=1 / Edit=2 / Selection=3 / View=4 / Go=5 / Run=6 / Terminal=7 / Help=8 /
+// Preferences=9，其中 Preferences 只在 macOS 原生菜单下出现，见 IsMacNativeContext）。
+// order 6 的「运行」菜单（MenubarDebugMenu，debug.contribution.ts:261-270）尚未实现，
+// 已登记在 docs/vscode-reference.md 第 5 节。
 addMenubarItem("文件", MenuId.MenubarFileMenu, 1);
 addMenubarItem("编辑", MenuId.MenubarEditMenu, 2);
 addMenubarItem("选择", MenuId.MenubarSelectionMenu, 3);
 addMenubarItem("视图", MenuId.MenubarViewMenu, 4);
 addMenubarItem("转到", MenuId.MenubarGoMenu, 5);
-// 「终端」：顺序 7，对齐 VS Code menubar.contribution.ts 中 Terminal 的 order（Go=5 / Terminal=7 / Help=8）。
+// 「终端」：顺序 7，对齐 menubar.contribution.ts:60-69。
 addMenubarItem("终端", MenuId.MenubarTerminalMenu, 7);
-addMenubarItem("帮助", MenuId.MenubarHelpMenu, 9);
+// 「帮助」：顺序 8，对齐 menubar.contribution.ts:70-79。
+addMenubarItem("帮助", MenuId.MenubarHelpMenu, 8);
 
 // 归档能力尚未接入：以恒为假的上下文键让相关项置灰（而非给出无效按钮）。
 const PVF_READY = ContextKeyExpr.has("pvfArchiveSupport");
 const HAS_SELECTION = ContextKeyExpr.has("editorHasSelection");
 
 // ---------------- 文件 ----------------
-// 启动默认打开的编辑器输入：本仓库没有编辑器持久化，固定打开内置示例脚本
-// （对齐 VS Code 启动时恢复编辑器输入的语义）。由 main.js 在挂载前调用，不挂菜单。
+// 启动默认打开的编辑器输入：内置样本文件（默认预览）。本仓库没有编辑器持久化，固定打开
+// 清单里指定的那一份（common.nut，对齐 VS Code 启动时恢复编辑器输入的语义）。由 main.js 在挂载前
+// 调用，不挂菜单 —— 切换其它样本走「快速打开」的内置文件清单（Ctrl+P，见 builtInFiles.js）。
 registerAction2({
     id: "pvf.openDefaultPreview",
     title: "打开默认预览文件",
@@ -219,8 +225,6 @@ registerAction2({
 
 // ---------------- 视图 ----------------
 const SIDEBAR_VISIBLE = ContextKeyExpr.has("sidebarVisible");
-const WORD_WRAP_ON = ContextKeyExpr.has("wordWrapOn");
-const MINIMAP_ON = ContextKeyExpr.has("minimapOn");
 
 registerAction2({
     id: "workbench.action.toggleSidebarVisibility",
@@ -236,38 +240,10 @@ registerAction2({
         setStatus(appState.sidebarVisible ? "已显示侧栏" : "已隐藏侧栏");
     }
 });
-registerAction2({
-    id: "editor.action.toggleWordWrap",
-    title: "切换自动换行",
-    keybinding: { primary: "Alt+Z" },
-    toggled: WORD_WRAP_ON,
-    // Alt+Z 在编辑器内由 Monaco 原生处理（分发时被其 stopPropagation 拦截），
-    // 编辑器外则走本命令；因此按 VS Code 归为编辑器作用域。
-    editorScoped: true,
-    menu: [
-        { id: MenuId.MenubarViewMenu, group: "1_layout", order: 2 },
-        { id: MenuId.LayoutControlMenu, group: "1_layout", order: 2 }
-    ],
-    run() {
-        appState.wordWrap = !appState.wordWrap;
-        updateEditorOptions({ wordWrap: appState.wordWrap ? "on" : "off" });
-        setStatus(appState.wordWrap ? "已开启自动换行" : "已关闭自动换行");
-    }
-});
-registerAction2({
-    id: "editor.action.toggleMinimap",
-    title: "切换缩略图",
-    toggled: MINIMAP_ON,
-    menu: [
-        { id: MenuId.MenubarViewMenu, group: "1_layout", order: 3 },
-        { id: MenuId.LayoutControlMenu, group: "1_layout", order: 3 }
-    ],
-    run() {
-        appState.minimap = !appState.minimap;
-        updateEditorOptions({ minimap: { enabled: appState.minimap } });
-        setStatus(appState.minimap ? "已显示缩略图" : "已隐藏缩略图");
-    }
-});
+// 「切换自动换行」（workbench/contrib/codeEditor/browser/toggleWordWrap.ts）与「切换缩略图」
+// （同目录 toggleMinimap.ts）已迁到各自的 contribution 文件：
+// 前者按模型的临时覆盖 + editorWordWrap 上下文键，后者是配置项 editor.minimap.enabled，
+// 都不再由 appState 承载。见 src/workbench/contrib/codeEditor/{wordWrap,minimap}.contribution.js。
 registerAction2({
     id: "editor.action.fontZoomIn",
     title: "放大",
@@ -320,7 +296,7 @@ registerAction2({
     title: "欢迎",
     menu: { id: MenuId.MenubarHelpMenu, group: "1_help", order: 1 },
     run() {
-        openEditor({ id: "welcome", name: "欢迎", languageId: "plaintext", content: WELCOME_TEXT, pinned: true });
+        openEditor(WELCOME_FILE);
         setStatus("Monaco 编辑器内核");
     }
 });
@@ -334,9 +310,9 @@ registerAction2({
 });
 
 // 初始化视图相关上下文键（与 appState 初值保持一致）。
+// 自动换行 / 缩略图的键不在此列：前者由编辑器部件的模型与选项变化刷新，
+// 后者是 config.* 派生键（见各自 contribution）。
 contextKeys.set("sidebarVisible", appState.sidebarVisible);
-contextKeys.set("wordWrapOn", appState.wordWrap);
-contextKeys.set("minimapOn", appState.minimap);
 contextKeys.set("activeViewContainer", appState.activeViewContainerId);
 contextKeys.set("editorFocus", false);
 contextKeys.set("editorHasSelection", false);

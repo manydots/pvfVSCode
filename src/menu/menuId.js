@@ -33,6 +33,13 @@ MenuId.MenubarHelpMenu = new MenuId("MenubarHelpMenu");
 MenuId.EditorContext = new MenuId("EditorContext");
 MenuId.CommandPalette = new MenuId("CommandPalette");
 
+// 标题栏命令中心（对齐 VS Code platform/actions/common/actions.ts:120-121 的
+// MenuId.CommandCenter / CommandCenterCenter）：CommandCenter 是命令中心所在的那条工具栏，
+// CommandCenterCenter 是中心圆角框里那份子菜单（快速打开等），
+// 见 workbench/contrib/titlebar/commandCenter.contribution.js。
+MenuId.CommandCenter = new MenuId("CommandCenter");
+MenuId.CommandCenterCenter = new MenuId("CommandCenterCenter");
+
 // 编辑器标签栏：右侧动作工具栏与标签右键菜单
 // （对齐 VS Code MenuId.EditorTitle / EditorTitleContext / EditorTabsBarContext）。
 MenuId.EditorTitle = new MenuId("EditorTitle");

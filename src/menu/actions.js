@@ -4,6 +4,7 @@
 // 菜单只按 id 引用命令，渲染时再向上下文求值决定可见性与启用态。
 
 import { registerCommand, getCommand } from "@/menu/commands.js";
+import { MenuId } from "@/menu/menuId.js";
 
 const _menuItems = new Map();
 const _keybindings = new Map();
@@ -44,7 +45,21 @@ export function registerAction2(action) {
         // 对齐 VS Code 编辑器命令的 when: editorFocus。
         const handler = (...args) => action.run(...args);
         handler.editorScoped = action.run.editorScoped === true || action.editorScoped === true;
-        registerCommand(action.id, handler);
+        // 命令元数据：title 作为 description（对齐 platform/actions/common/actions.ts:742
+        // 的 `metadata: command.metadata ?? { description: action.desc.title }`），
+        // 命令快速输入（「>」模式）与命令面板据此显示标题。
+        registerCommand(action.id, handler, { description: action.title, icon: action.icon, keybinding: action.keybinding });
+        // 命令面板落点：VS Code 的 registerAction2 会为每个动作自动追加一条 MenuId.CommandPalette
+        // 菜单项（`if (f1) { appendMenuItem(MenuId.CommandPalette, { command, when: command.precondition }) }`，
+        // 见 platform/actions/common/actions.ts:754-755），f1: false 的动作不出现。
+        // 命令快速输入（「>」模式）正是从该菜单取数（commandsQuickAccess.ts:229-236）。
+        if (action.f1 !== false) {
+            appendMenuItem(MenuId.CommandPalette, {
+                command: { id: action.id, title: action.title, icon: action.icon },
+                precondition: action.precondition,
+                when: action.precondition
+            });
+        }
     }
     if (action.menu) {
         const menus = Array.isArray(action.menu) ? action.menu : [action.menu];
@@ -86,16 +101,16 @@ export function getKeybindingRules() {
     return rules;
 }
 
-// 快捷键显示文本（如 Ctrl+Shift+K）；多条规则的主键位以 " / " 并列。
+// 快捷键显示文本（如 Ctrl+Shift+K）。
+// 只取首条规则的主键位：权威的 keybindingService.lookupKeybinding(commandId) 返回「首选」的那一条
+// （platform/keybinding/common/keybinding.ts:95-96，菜单与命令面板用它渲染快捷键列），
+// secondary（如 F1 之于 Ctrl+Shift+P、Ctrl+E 之于 Ctrl+P）不参与显示。
+// 和弦（`primary` 为数组，如 VS Code 的 "ctrl+k ctrl+w"）以 " / " 连接成一段文本。
 export function getKeybindingLabel(commandId) {
     const rules = _keybindings.get(commandId);
-    if (!rules || !rules.length) return "";
-    const primaries = [];
-    for (const rule of rules) {
-        if (!rule.primary) continue;
-        primaries.push(Array.isArray(rule.primary) ? rule.primary.join(" / ") : rule.primary);
-    }
-    return primaries.join(" / ");
+    const rule = rules?.find(candidate => candidate.primary);
+    if (!rule) return "";
+    return Array.isArray(rule.primary) ? rule.primary.join(" / ") : rule.primary;
 }
 
 // 按菜单 id + 上下文解析菜单结构，返回 [group, items[]] 分组列表（对齐 IMenu.getActions）。

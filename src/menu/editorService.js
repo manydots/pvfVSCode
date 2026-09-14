@@ -16,8 +16,3 @@ export function triggerEditorAction(actionId, ...args) {
     _activeEditor.trigger("menu", actionId, ...args);
     return true;
 }
-
-export function updateEditorOptions(options) {
-    if (!_activeEditor) return;
-    _activeEditor.updateOptions(options);
-}
