@@ -4,16 +4,7 @@
 //  Supports: parse, decrypt, decode, edit, rebuild, save
 // ============================================================
 
-import {
-    decodeText,
-    encodeText,
-    decodeUtf16LE,
-    encodeUtf16LE,
-    detectEncoding as iconvDetect,
-    decodeKoreanMojibake,
-    decodeKoreanMojibakeUtf16,
-    recoverKoreanNameFromGbkText
-} from "@/utils/encoding.js";
+import { decodeText, encodeText, decodeUtf16LE, encodeUtf16LE, detectEncoding, decodeKoreanMojibake, decodeKoreanMojibakeUtf16, recoverKoreanNameFromGbkText } from "@/utils/encoding.js";
 
 import {
     readInt32LE,
@@ -1308,7 +1299,7 @@ class PvfArchive {
     // ---- Content encode (text -> raw bytes) ----
     // 文件类型: dataType=1 token 流文本 -> 5 字节 token 序列
     // 与 decodeToken 互逆：按空白拆分文本为 token（反引号字符串 / {N=...} 标记 / [标签] / 数字 / 裸串），
-    // 每个 token 写为 1 字节类型 + 4 字节小端 int32。# 为行注释。
+    // 每个 token 写为 1 字节类型 + 4 字节小端 int32。`#` 与 `//` 为行注释（到行尾）。
     encodeTokenText(text) {
         const tokens = [];
         let i = 0;
@@ -1318,7 +1309,9 @@ class PvfArchive {
                 i++;
                 continue;
             }
-            if (ch === "#") {
+            // 行注释只在 token 起始位置生效（此处即 token 边界）：`a//b` / `a#b` 由下面的裸串读取
+            // 整体吃掉，仍是数据。与 pvfText.js 的词法规则一致。
+            if (ch === "#" || (ch === "/" && text[i + 1] === "/")) {
                 while (i < text.length && text[i] !== "\n") i++;
                 continue;
             }
@@ -2415,9 +2408,4 @@ function buildFileTree(files) {
     }
     sortTree(root);
     return root;
-}
-
-// ---- Encoding detection ----
-function detectEncoding(bytes) {
-    return iconvDetect(bytes);
 }

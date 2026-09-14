@@ -6,7 +6,6 @@
 
 import { decodeText, encodeText } from "@/utils/encoding.js";
 import { readInt32LE, readUInt32LE, writeInt32LE, pvfDecryptTw, pvfEncryptTw, TW_DECRYPT_KEY, twCreateBuffKey, twFileNameHash, PvfFormat } from "@/utils/pvfCodec.js";
-import { encodeEUCKR } from "@/utils/euckrEncoder.js";
 import { extractTagFromText, extractNameFromText, extractIntFieldFromText, extractStringFieldFromText, PvfScriptIndenter } from "@/utils/pvfTool.js";
 
 function float32ToString(bits) {
@@ -1289,6 +1288,7 @@ export class TwPvfArchive {
     // TW 脚本文本 -> token 字节（含 0xD0B0 魔数头）。与 decodeTwToken 互逆：
     //   [xxx]/[/xxx] 节、`串`、{3=N}/{6=`串`}/{8=`串`}、<id::name`text`>、数字。
     // 字符串一律经 _twIntern 入 stringtable 表；字符串链接的 text 变化同步回写 strlst。
+    // `#` / `//` 为行注释（到行尾），与 pvfTool.js 的 encodeTokenText、pvfText.js 的词法一致。
     encodeTwToken(text) {
         const tokens = [];
         let i = 0;
@@ -1298,7 +1298,8 @@ export class TwPvfArchive {
                 i++;
                 continue;
             }
-            if (ch === "#") {
+            // 行注释（`#` / `//` 到行尾）只在 token 起始位置生效，与 pvfText.js 的词法一致。
+            if (ch === "#" || (ch === "/" && text[i + 1] === "/")) {
                 while (i < text.length && text[i] !== "\n") i++;
                 continue;
             }
@@ -1417,11 +1418,11 @@ export class TwPvfArchive {
         // .nut 明文 Squirrel 脚本：不 token 化，按显示文本的编码语义对称回写
         // （docs/pvf-tw-nut-script.md §3.2）：净化混合流（CP949 直解语义，含 U+FFFD 或谚文
         // 音节）经 CP949 反查编码逐字节还原原字节语义（「占쏙옙」循环 ↔ EF BF BD 循环、
-        // 残留对 타 ↔ C5 B8；不可逆替换符显式降级 ?，沿用 encodeGBK 惯例）——外部 CP949
+        // 残留对 타 ↔ C5 B8；不可逆替换符显式降级 ?，与 iconv 的编码器行为一致）——外部 CP949
         // 工具与本仓读回显示一致；纯 UTF-8 文本（繁体水印 / 纯 ASCII）按 UTF-8 原样回写。
         if (dataTypeIsNut(file)) {
             const normalized = String(text || "");
-            if (/[\uFFFD\uAC00-\uD7A3]/.test(normalized)) return encodeEUCKR(normalized);
+            if (/[\uFFFD\uAC00-\uD7A3]/.test(normalized)) return encodeText(normalized, "euc-kr");
             return encodeText(normalized, "utf-8");
         }
         if (dataTypeIsLst(file)) return this.encodeTwLst(text);

@@ -1,112 +1,64 @@
-// Encoding utilities using native browser TextDecoder/TextEncoder
+// PVF 域的编解码门面。
+//
+// 编解码与探测**不在本文件实现**：唯一实现是 @/workbench/services/textfile/common/encoding.js
+// （编解码走 @vscode/iconv-lite-umd，猜测走 jschardet，决策链对齐
+// <vscode>/src/vs/workbench/services/textfile/browser/textFileService.ts:819-886）。
+// 本文件只保留两类东西：
+//   1. PVF 归档编码（sTrA 单字节字符串表）的探测入口 —— 用权威的 detectEncodingFromBuffer
+//      配 PVF 域的候选编码表（等价于 files.candidateGuessEncodings 机制）；
+//   2. .str / .lst 韩文乱码恢复（CP437 / GBK 双重转码还原）—— 这属 PVF 域特有逻辑，
+//      权威没有对应实现，见 docs/pvf-us-korean-mojibake.md、docs/pvf-jp-korean-mojibake.md。
+import { encodingCodec, detectEncodingFromBuffer, UTF8 } from "@/workbench/services/textfile/common/encoding.js";
+import { PVF_CANDIDATE_GUESS_ENCODINGS, resolvePvfDetectedEncoding } from "@/utils/pvfEncoding.js";
 
-import { encodeGBK, gbkCode } from "@/utils/gbkEncoder.js";
-import { encodeBig5 } from "@/utils/big5Encoder.js";
-
-const ENCODING_ALIASES = {
-    utf8: "utf-8",
-    "utf-8": "utf-8",
-    gbk: "gbk",
-    gb2312: "gbk",
-    big5: "big5",
-    // 韩文 EUC-KR / CP949（.nut 等韩文源明文脚本按原始编码直解，docs/pvf-tw-nut-script.md §3.1）
-    "euc-kr": "euc-kr",
-    euckr: "euc-kr",
-    cp949: "euc-kr"
-};
-
-const DEFAULT_ENCODING = "utf8";
-
-function resolveEnc(enc) {
-    return ENCODING_ALIASES[(enc || DEFAULT_ENCODING).toLowerCase()] || DEFAULT_ENCODING;
-}
-
-// TextDecoder 实例可重复 decode（无内部状态），复用避免每次 new 的开销
-// （字符串表逐条解码时可能调用数十万次，new TextDecoder 是显著成本）。
-const _decoderCache = new Map();
-const _encoderCache = new Map();
-
-function getDecoder(encoding) {
-    const enc = resolveEnc(encoding);
-    let d = _decoderCache.get(enc);
-    if (!d) {
-        d = new TextDecoder(enc);
-        _decoderCache.set(enc, d);
-    }
-    return d;
-}
-
-function getEncoder(encoding) {
-    const enc = resolveEnc(encoding);
-    if (enc !== "utf-8") {
-        let e = _encoderCache.get(enc);
-        if (!e) {
-            e = new TextEncoder();
-            _encoderCache.set(enc, e);
-        }
-        return e;
-    }
-    return new TextEncoder();
-}
-
+/**
+ * 解码字节为字符串。
+ * @param {Uint8Array} bytes
+ * @param {string} encoding
+ * @returns {string}
+ */
 export function decodeText(bytes, encoding) {
-    return getDecoder(encoding).decode(bytes);
+    return encodingCodec.decode(bytes, encoding);
 }
 
+/**
+ * 编码字符串为字节。编码名不受支持时**抛错**，不再静默按 UTF-8 写出
+ * （旧实现见 docs/vscode-reference.md 第 5 节「encode 侧静默回退 UTF-8」，属数据损坏风险）。
+ * @param {string} text
+ * @param {string} encoding
+ * @returns {Uint8Array}
+ */
 export function encodeText(text, encoding) {
-    const enc = resolveEnc(encoding);
-    if (enc === "utf-8") {
-        return getEncoder("utf-8").encode(text);
+    const enc = encoding || UTF8;
+    if (!encodingCodec.exists(enc)) {
+        throw new Error(`不支持的编码：${enc}（PVF 保存需要可用的编码器，拒绝按 UTF-8 静默写出）`);
     }
-    if (enc === "gbk" || enc === "gb2312") {
-        return encodeGBK(text);
-    }
-    if (enc === "big5") {
-        return encodeBig5(text);
-    }
-    // Other encodings: fall back to UTF-8 (native TextEncoder limitation)
-    return getEncoder("utf-8").encode(text);
+    return encodingCodec.encode(text, enc);
 }
 
 export function decodeUtf16LE(bytes) {
-    return new TextDecoder("utf-16le").decode(bytes);
+    return encodingCodec.decode(bytes, "utf16le");
 }
 
 export function encodeUtf16LE(text) {
-    const u16 = new Uint16Array(text.length);
-    for (let i = 0; i < text.length; i++) u16[i] = text.charCodeAt(i);
-    return new Uint8Array(u16.buffer, 0, text.length * 2);
+    return encodingCodec.encode(text, "utf16le");
 }
 
+/**
+ * PVF 归档编码探测（sTrA 字符串表）：BOM → 零字节启发式判 UTF-16/二进制 → jschardet 猜测。
+ * 对齐权威 <vscode>/src/vs/workbench/services/textfile/common/encoding.ts:440-508，
+ * 取值与顺序均来自该函数；本仓库整块读入，故同步返回。
+ *
+ * 探测不出结果（纯 ASCII、或猜测被 IGNORE_ENCODINGS 过滤）时按权威决策链回落 `files.encoding`
+ * 的默认值 UTF-8（textFileService.ts:873 的 `fileEncoding || UTF8`）。
+ * 候选集与名字映射取自 @/utils/pvfEncoding.js（与 check:encoding-oracle 单测同一份取值）。
+ * @param {Uint8Array} bytes
+ * @returns {string}
+ */
 export function detectEncoding(bytes) {
-    if (!bytes || bytes.length === 0) return DEFAULT_ENCODING;
-    // 采样前 8KB：含非 ASCII 即可快速判定（编码特征字节在任意位置出现即足以判定，
-    // 且 utf-8 fatal 对 GBK/Big5 数据在首个非 ASCII 字节即抛，采样判定结果与全量一致），
-    // 避免对可能达数 MB 的 sTrA 字符串表做全量 3 次解码尝试。
-    const sample = bytes.length > 8192 ? bytes.subarray(0, 8192) : bytes;
-    let hasNonAscii = false;
-    for (let i = 0; i < sample.length; i++) {
-        if (sample[i] >= 0x80) {
-            hasNonAscii = true;
-            break;
-        }
-    }
-    if (hasNonAscii) return detectFromSample(sample);
-    // 采样全 ASCII：特征字节可能在采样区间之外，退化为全量检测保持原语义
-    return detectFromSample(bytes);
-}
-
-function detectFromSample(sample) {
-    const candidates = ["utf-8", "gbk", "big5"];
-    for (const enc of candidates) {
-        try {
-            new TextDecoder(enc, { fatal: true }).decode(sample);
-            return enc;
-        } catch {
-            /* try next */
-        }
-    }
-    return "gbk";
+    if (!bytes || bytes.length === 0) return UTF8;
+    const detected = detectEncodingFromBuffer({ buffer: bytes, bytesRead: bytes.length }, true, PVF_CANDIDATE_GUESS_ENCODINGS);
+    return resolvePvfDetectedEncoding(detected.encoding, UTF8);
 }
 
 // ---- 韩文乱码恢复（CP437 → EUC-KR 反向链路）----
@@ -170,6 +122,17 @@ function _cp437Encode(text) {
     return Uint8Array.from(out);
 }
 
+// 单字符 GBK 码（高字节为区号），不可编码时返回 undefined。
+// 旧实现自带 Unicode→GBK 码表（@/utils/gbkEncoder.js，已删除）；改为经唯一编解码实现取码。
+// 实测 BMP 汉字区两者仅 8 个 PUA 区字（0xFE50~0xFEA0 一带）有差异，且这些码值都超出下方
+// maxLead 判别区间，判定结果不变。
+function _gbkCode(ch) {
+    const code = ch.codePointAt(0);
+    if (code < 0x80) return code;
+    const bytes = encodingCodec.encode(ch, "gbk");
+    return bytes.length === 2 ? (bytes[0] << 8) | bytes[1] : undefined;
+}
+
 /**
  * 解码 sTrA 单字节字符串，并在必要时恢复韩文乱码。
  * 先用 primaryEncoding 正常解码；仅当结果含 CP437 装饰字符或 U+FFFD 时，
@@ -186,7 +149,8 @@ export function decodeKoreanMojibake(bytes, encoding) {
     const krGbk = recoverKoreanFromGbkText(s);
     if (krGbk != null) return krGbk;
 
-    // 存储可能是 UTF-8 编码的 box-drawing 乱码文本
+    // 存储可能是 UTF-8 编码的 box-drawing 乱码文本。
+    // 这里是「是否为合法 UTF-8」的校验而非解码，iconv 无 fatal 模式，故保留 TextDecoder 的严格校验。
     let text = null;
     try {
         text = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
@@ -201,7 +165,7 @@ export function decodeKoreanMojibake(bytes, encoding) {
     }
 
     // 原始字节本身是 EUC-KR 韩文（仅音节区，避免误判 GBK 假名/符号区）
-    const kr3 = new TextDecoder("euc-kr").decode(bytes);
+    const kr3 = decodeText(bytes, "euc-kr");
     if (HANGUL_SYLLABLE_RE.test(kr3)) return kr3;
 
     return s;
@@ -229,7 +193,7 @@ function recoverKoreanFromMojibakeText(text) {
     if (!_hasCp437Char(text)) return null;
     const b = _cp437Encode(text);
     if (!b) return null;
-    const kr = new TextDecoder("euc-kr").decode(b);
+    const kr = decodeText(b, "euc-kr");
     return HANGUL_RE.test(kr) ? kr : null;
 }
 
@@ -260,14 +224,14 @@ function _recoverKoreanFromGbkText(text, requireSpace, allowKsc) {
         const c = ch.codePointAt(0);
         if (c >= 0x4e00 && c <= 0x9fff) {
             hasCjk = true;
-            const g = gbkCode(ch);
+            const g = _gbkCode(ch);
             if (g == null || g < 0xb000 || g > maxLead) return null;
         } else if (c >= 0x3400 && c <= 0x4dbf) {
             return null; // 扩展 A 区汉字：非 GBK 汉字区
         }
     }
     if (!hasCjk) return null;
-    const kr = new TextDecoder("euc-kr").decode(encodeGBK(text));
+    const kr = decodeText(encodeText(text, "gbk"), "euc-kr");
     if (!HANGUL_SYLLABLE_RE.test(kr)) return null;
     // 中文属性文本特征（`攻击力 +8%%`、`成长胶囊 (1%%)`、多行属性串）：
     // 86JP 汉化属性文本被误恢复实测 357 条含 %、24 条含换行，韩文乱码恢复结果不含二者
