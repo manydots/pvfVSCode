@@ -11,7 +11,8 @@ import { contextKeys } from "@/menu/contextKey.js";
 import Codicon from "@/components/Codicon.vue";
 import MenuToolbar from "@/components/MenuToolbar.vue";
 import MenuDropdown from "@/components/MenuDropdown.vue";
-import { activateEditor, closeEditor, editorGroup, getEditorIcon } from "@/workbench/contrib/editor/editorGroupService.js";
+import { activateEditor, closeEditor, editorGroup } from "@/workbench/contrib/editor/editorGroupService.js";
+import { getFileIconClasses } from "@/workbench/services/themes/fileIconTheme.js";
 
 const hoveredId = ref(null);
 const contextMenu = ref(null);
@@ -19,8 +20,9 @@ const contextMenu = ref(null);
 // 当前打开的编辑器数量为 0 时整条标签栏隐藏（对齐 .tabs-and-actions-container.empty）。
 const isEmpty = computed(() => editorGroup.editors.length === 0);
 
-function iconFor(editor) {
-    return getEditorIcon(editor);
+// 标签图标走 Seti 文件图标主题（对齐 editorGroupView.ts:552 给 .title 加 show-file-icons）。
+function fileIconClasses(editor) {
+    return getFileIconClasses(editor.name, editor.languageId);
 }
 
 // 脏标签在未 hover 时显示实心圆点，hover 时显示关闭图标（对齐 CSS 的 ::before 图标替换）。
@@ -75,7 +77,7 @@ function closeContextMenu() {
 <template>
     <div class="tabs-and-actions-container" :class="{ empty: isEmpty }">
         <div class="tabs-scroll">
-            <div class="tabs-container" role="tablist" @wheel="onWheel">
+            <div class="tabs-container show-file-icons" role="tablist" @wheel="onWheel">
                 <div
                     v-for="editor in editorGroup.editors"
                     :key="editor.id"
@@ -93,8 +95,7 @@ function closeContextMenu() {
                     @mouseenter="hoveredId = editor.id"
                     @mouseleave="hoveredId = null"
                     @contextmenu.prevent.stop="openContextMenu($event, editor)">
-                    <div class="tab-label monaco-icon-label" :class="{ italic: !editor.pinned }">
-                        <span class="monaco-icon-label-iconpath"><Codicon :name="iconFor(editor)" :size="16" /></span>
+                    <div class="tab-label monaco-icon-label" :class="[{ italic: !editor.pinned }, fileIconClasses(editor)]">
                         <span class="label-name">{{ editor.name }}</span>
                     </div>
                     <div class="tab-actions">
@@ -174,8 +175,13 @@ function closeContextMenu() {
     box-shadow: var(--vscode-shadow-sm);
 }
 
+/* 激活（选中）标签的淡色底：取 Modern UI 的
+   workbench/contrib/modernUI/browser/media/tabs.css:311-316 —— 该处给 `.tab.active > .tab-fill`
+   设 `background-color: var(--modern-ui-editor-tab-active-background)`（= --vscode-modernEditorTab-activeBackground，
+   见 styles/theme.css）。本仓库没有 .tab-fill 元素，底色直接落在标签盒上。
+   classic 的 tab.activeBackground（= 编辑器底色）与 :172 的 inset 阴影保持原样。 */
 .tab.active {
-    background-color: var(--vscode-tab-activeBackground);
+    background-color: var(--vscode-modernEditorTab-activeBackground);
     color: var(--vscode-tab-activeForeground);
     box-shadow: inset var(--vscode-shadow-active-tab);
 }
@@ -200,11 +206,10 @@ function closeContextMenu() {
     padding-right: 5px;
 }
 
-.monaco-icon-label-iconpath {
-    display: flex;
-    align-items: center;
-    flex: 0 0 auto;
-    margin-right: 6px;
+/* 标签内的图标：度量由 .monaco-icon-label::before 提供（app.css，出处 iconlabel.css:14-32），
+   高度对齐标签高度（editortabscontrol.css:37-42 的 --editor-group-tab-height）。 */
+.tab-label::before {
+    height: var(--vscode-tab-height);
 }
 
 .tab-label .label-name {
