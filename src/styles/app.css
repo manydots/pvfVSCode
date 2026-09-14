@@ -25,6 +25,31 @@ button {
     cursor: pointer;
 }
 
+/* 图标标签（对齐 base/browser/ui/iconLabel/iconlabel.css:8-32）：
+   条目元素带 .monaco-icon-label 与文件图标类，图标由 ::before 渲染 ——
+   度量（16x22、右内边距 6px）在这里给，字体族/content/color 由文件图标主题的样式表给
+   （workbench/services/themes/fileIconTheme.js）。svg 背景图标那一列本仓库不用，未引入。 */
+.monaco-icon-label {
+    display: flex;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.monaco-icon-label::before {
+    background-size: 16px;
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-right: 6px;
+    width: 16px;
+    height: 22px;
+    line-height: inherit !important;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align: top;
+    flex-shrink: 0;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;

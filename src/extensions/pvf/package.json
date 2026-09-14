@@ -1,0 +1,74 @@
+{
+    "name": "pvf",
+    "publisher": "pvf-vscode",
+    "version": "0.0.0",
+    "displayName": "PVF",
+    "description": "PVF 归档内容与 Squirrel 脚本的语言支持。",
+    "browser": "./browser/pvfExtension.js",
+    "activationEvents": [
+        "onLanguage:squirrel",
+        "onLanguage:pvf-list",
+        "onLanguage:pvf-dat",
+        "onLanguage:pvf-token"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "squirrel",
+                "aliases": [
+                    "Squirrel",
+                    "squirrel"
+                ],
+                "extensions": [
+                    ".nut"
+                ],
+                "mimetypes": [
+                    "text/x-squirrel"
+                ]
+            },
+            {
+                "id": "pvf-list",
+                "aliases": [
+                    "PVF List",
+                    "pvf-list"
+                ],
+                "extensions": [
+                    ".lst"
+                ],
+                "mimetypes": [
+                    "text/x-pvf-list"
+                ]
+            },
+            {
+                "id": "pvf-dat",
+                "aliases": [
+                    "PVF Data Table",
+                    "pvf-dat"
+                ],
+                "extensions": [
+                    ".dat"
+                ],
+                "mimetypes": [
+                    "text/x-pvf-dat"
+                ]
+            },
+            {
+                "id": "pvf-token",
+                "aliases": [
+                    "PVF Token Stream",
+                    "pvf-token"
+                ],
+                "extensions": [
+                    ".str",
+                    ".aic",
+                    ".ani",
+                    ".etc",
+                    ".stk"
+                ],
+                "mimetypes": [
+                    "text/x-pvf-token"
+                ]
+            }
+        ]
+    }
+}

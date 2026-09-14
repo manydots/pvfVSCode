@@ -1,0 +1,1212 @@
+0>[name]
+1>????? ?????? ??????
+2>[equipment type]
+3>[hair avatar]
+4>[LAYER]
+5>[waiting motion]
+6>hcc3Animation/Stay_300.ani
+7>[move motion]
+8>hcc3Animation/Move_300.ani
+9>[sit motion]
+10>hcc3Animation/Sit_300.ani
+11>[damage motion 1]
+12>hcc3Animation/Damage1_300.ani
+13>[damage motion 2]
+14>hcc3Animation/Damage2_300.ani
+15>[down motion]
+16>hcc3Animation/Down_300.ani
+17>[overturn motion]
+18>hcc3Animation/Overturn_300.ani
+19>[attack motion]
+20>hcc3Animation/Throw_300.ani
+21>[/attack motion]
+22>??? ??????
+23>hcc3-3Animation/Stay_300.ani
+24>hcc3-3Animation/Move_300.ani
+25>hcc3-3Animation/Sit_300.ani
+26>hcc3-3Animation/Damage1_300.ani
+27>hcc3-3Animation/Damage2_300.ani
+28>hcc3-3Animation/Down_300.ani
+29>hcc3-3Animation/Overturn_300.ani
+30>hcc3-3Animation/Throw_300.ani
+31>
+32>???? ??????
+33>Hcc2Animation/Stay_300.ani
+34>Hcc2Animation/Move_300.ani
+35>Hcc2Animation/Sit_300.ani
+36>Hcc2Animation/Damage1_300.ani
+37>Hcc2Animation/Damage2_300.ani
+38>Hcc2Animation/Down_300.ani
+39>Hcc2Animation/Overturn_300.ani
+40>Hcc2Animation/Throw_300.ani
+41>Hcc2-2Animation/Stay_300.ani
+42>Hcc2-2Animation/Move_300.ani
+43>Hcc2-2Animation/Sit_300.ani
+44>Hcc2-2Animation/Damage1_300.ani
+45>Hcc2-2Animation/Damage2_300.ani
+46>Hcc2-2Animation/Down_300.ani
+47>Hcc2-2Animation/Overturn_300.ani
+48>Hcc2-2Animation/Throw_300.ani
+49>Hcc2-2Animation/Throw3_300.ani
+50>hcc1Animation/Stay_200.ani
+51>hcc1Animation/Move_200.ani
+52>hcc1Animation/Sit_200.ani
+53>hcc1Animation/Damage1_200.ani
+54>hcc1Animation/Damage2_200.ani
+55>hcc1Animation/Down_200.ani
+56>hcc1Animation/Overturn_200.ani
+57>hcc1Animation/Attack1_200.ani
+58>hcc1Animation/SerialLightning_200.ani
+59>hcc1Animation/AroundLightning_200.ani
+60>[etc motion]
+61>hcc1Animation/repairBunker.ani
+62>[/etc motion]
+63>???????? ???????
+64>[hat avatar]
+65>SantaAni/GobSantaAni/Stay.ani
+66>SantaAni/GobSantaAni/Move.ani
+67>SantaAni/GobSantaAni/Sit.ani
+68>SantaAni/GobSantaAni/Damage1.ani
+69>SantaAni/GobSantaAni/Damage2.ani
+70>SantaAni/GobSantaAni/Down.ani
+71>SantaAni/GobSantaAni/Overturn.ani
+72>SantaAni/GobSantaAni/Attack.ani
+73>??? ?????? ????
+74>[pants]
+75>gcc1Animation/Stay_100.ani
+76>gcc1Animation/Move_100.ani
+77>gcc1Animation/Sit_100.ani
+78>gcc1Animation/Damage1_100.ani
+79>gcc1Animation/Damage2_100.ani
+80>gcc1Animation/Down_100.ani
+81>gcc1Animation/Overturn_100.ani
+82>gcc1Animation/Attack1_100.ani
+83>gcc1Animation/repairBunker.ani
+84>???? ????
+85>Gcc1-3Animation/Stay_100.ani
+86>Gcc1-3Animation/Move_100.ani
+87>Gcc1-3Animation/Sit_100.ani
+88>Gcc1-3Animation/Damage1_100.ani
+89>Gcc1-3Animation/Damage2_100.ani
+90>Gcc1-3Animation/Down_100.ani
+91>Gcc1-3Animation/Overturn_100.ani
+92>Gcc1-3Animation/Attack1_100.ani
+93>?????? ????
+94>Gcc1-2Animation/Stay_100.ani
+95>Gcc1-2Animation/Move_100.ani
+96>Gcc1-2Animation/Sit_100.ani
+97>Gcc1-2Animation/Damage1_100.ani
+98>Gcc1-2Animation/Damage2_100.ani
+99>Gcc1-2Animation/Down_100.ani
+100>Gcc1-2Animation/Overturn_100.ani
+101>Gcc1-2Animation/Attack1_100.ani
+102>????? ????????
+103>[shoulder]
+104>galokArmorAnimation/Stay.ani
+105>galokArmorAnimation/Move.ani
+106>galokArmorAnimation/Sit.ani
+107>galokArmorAnimation/Damage1.ani
+108>galokArmorAnimation/Damage2.ani
+109>galokArmorAnimation/Down.ani
+110>galokArmorAnimation/Overturn.ani
+111>galokArmorAnimation/Attack1.ani
+112>??????????? ???????
+113>SantaAni/CwGobSantaAni/Hat/Stay.ani
+114>SantaAni/CwGobSantaAni/Hat/Move.ani
+115>SantaAni/CwGobSantaAni/Hat/Sit.ani
+116>SantaAni/CwGobSantaAni/Hat/Damage1.ani
+117>SantaAni/CwGobSantaAni/Hat/Damage2.ani
+118>SantaAni/CwGobSantaAni/Hat/Down.ani
+119>SantaAni/CwGobSantaAni/Hat/Overturn.ani
+120>SantaAni/CwGobSantaAni/Hat/Attack.ani
+121>[breast avatar]
+122>SantaAni/CwGobSantaAni/Beard/Stay.ani
+123>SantaAni/CwGobSantaAni/Beard/Move.ani
+124>SantaAni/CwGobSantaAni/Beard/Sit.ani
+125>SantaAni/CwGobSantaAni/Beard/Damage1.ani
+126>SantaAni/CwGobSantaAni/Beard/Damage2.ani
+127>SantaAni/CwGobSantaAni/Beard/Down.ani
+128>SantaAni/CwGobSantaAni/Beard/Overturn.ani
+129>SantaAni/CwGobSantaAni/Beard/Attack.ani
+130>SantaAni/CwGobSantaAni/Beard/RepairBunker.ani
+131>[shoes]
+132>bcc9animation/Stay_100.ani
+133>bcc9animation/Move_100.ani
+134>bcc9animation/Sit_100.ani
+135>bcc9animation/Damage1_100.ani
+136>bcc9animation/Damage2_100.ani
+137>bcc9animation/Down_100.ani
+138>bcc9animation/Overturn_100.ani
+139>bcc9animation/Attack1_100.ani
+140>bcc9animation/Throw_100.ani
+141>bcc9animation/ChargeAttack.ani
+142>bcc9animation/TripleThrow_100.ani
+143>bcc9animation/FiveThrow.ani
+144>???? ????? ???? ???
+145>bcc1Animation/Stay_600.ani
+146>bcc1Animation/Move_600.ani
+147>bcc1Animation/Sit_600.ani
+148>bcc1Animation/Damage1_600.ani
+149>bcc1Animation/Damage2_600.ani
+150>bcc1Animation/Down_600.ani
+151>bcc1Animation/Overturn_600.ani
+152>bcc1Animation/Throw_600.ani
+153>bcc1-2Animation/Stay_600.ani
+154>bcc1-2Animation/Move_600.ani
+155>bcc1-2Animation/Sit_600.ani
+156>bcc1-2Animation/Damage1_600.ani
+157>bcc1-2Animation/Damage2_600.ani
+158>bcc1-2Animation/Down_600.ani
+159>bcc1-2Animation/Overturn_600.ani
+160>bcc1-2Animation/Throw_600.ani
+161>acc9-1animation/Stay_100.ani
+162>acc9-1animation/Move_100.ani
+163>acc9-1animation/Sit_100.ani
+164>acc9-1animation/Damage1_100.ani
+165>acc9-1animation/Damage2_100.ani
+166>acc9-1animation/Down_100.ani
+167>acc9-1animation/Overturn_100.ani
+168>acc9-1animation/Attack1_100.ani
+169>acc9-1animation/Throw_100.ani
+170>acc9-1animation/ChargeAttack.ani
+171>acc9-1animation/TripleThrow_100.ani
+172>acc9-1animation/FiveThrow.ani
+173>???? ??
+174>GhoulThrowerClothes/Stay.ani
+175>GhoulThrowerClothes/Move.ani
+176>GhoulThrowerClothes/Sit.ani
+177>GhoulThrowerClothes/Damage1.ani
+178>GhoulThrowerClothes/Damage2.ani
+179>GhoulThrowerClothes/Down.ani
+180>GhoulThrowerClothes/Overturn.ani
+181>GhoulThrowerClothes/ScratchAttack.ani
+182>GhoulThrowerClothes/LongAttack.ani
+183>GhoulThrowerClothes/ThrowAttack.ani
+184>GhoulThrowerClothes/DoubleThrowAttack.ani
+185>???????? ?????? ????
+186>[weapon]
+187>Animation/Punch.ani
+188>Animation/Gem.ani
+189>?ε????? ????
+190>[coat avatar]
+191>RodAni/TryGrab.ani
+192>RodAni/Grab.ani
+193>RodAni/GrabAttack.ani
+194>RodAni/ReleaseGrab.ani
+195>GolAni/TryGrab.ani
+196>GolAni/Grab.ani
+197>GolAni/GrabAttack.ani
+198>GolAni/ReleaseGrab.ani
+199>?????????? ????
+200>DenAni/TryGrab.ani
+201>DenAni/Grab.ani
+202>DenAni/GrabAttack.ani
+203>DenAni/ReleaseGrab.ani
+204>?? ????
+205>buffaloArtifacterRuneBlue/Stay.ani
+206>buffaloArtifacterRuneBlue/Move.ani
+207>buffaloArtifacterRuneBlue/Damage1.ani
+208>buffaloArtifacterRuneBlue/Damage2.ani
+209>buffaloArtifacterRuneBlue/Down.ani
+210>buffaloArtifacterRuneBlue/AttackRoonStaff.ani
+211>buffaloArtifacterRuneBlue/Laugh.ani
+212>buffaloArtifacterRuneBlue/LaughLoop.ani
+213>buffaloArtifacterRuneBlue/StayLong.ani
+214>buffaloArtifacterRuneBlue/StayWaitEtc.ani
+215>buffaloArtifacterRuneBlack/Stay.ani
+216>buffaloArtifacterRuneBlack/Move.ani
+217>buffaloArtifacterRuneBlack/Damage1.ani
+218>buffaloArtifacterRuneBlack/Damage2.ani
+219>buffaloArtifacterRuneBlack/Down.ani
+220>buffaloArtifacterRuneBlack/AttackRoonStaff.ani
+221>buffaloArtifacterRuneBlack/Laugh.ani
+222>buffaloArtifacterRuneBlack/LaughLoop.ani
+223>buffaloArtifacterRuneBlack/StayLong.ani
+224>buffaloArtifacterRuneBlack/StayWaitEtc.ani
+225>石像怪的牙齒
+226>[name2]
+227>Tooth of Gargolye
+228>[grade]
+229>[attach type]
+230>[free]
+231>[creation rate]
+232>[rarity]
+233>[weight]
+234>[usable job]
+235>[all]
+236>[/usable job]
+237>[icon]
+238>Item/creature/artifact_red.img
+239>[field image]
+240>Item/field_creature.img
+241>[artifact red]
+242>[sub type]
+243>[creature minimum level]
+244>[creature physical attack]
+245>[price]
+246>[cool time]
+247>[move wav]
+248>BONE_TOUCH
+249>[set item master]
+250>地獄守門犬的牙齒
+251>Tooth of Cerberus
+252>幼龍的牙齒
+253>Tooth of Baby Dragon
+254>奪心魔的触須
+255>Tentacle of Illithid
+256>[creature magical attack]
+257>雙足翼龍的爪
+258>Talon of Wyvern
+259>地獄獵犬的爪
+260>Talon of Kellberos
+261>獅鷲的爪
+262>Talon of Griffin
+263>石像怪的爪
+264>Talon of Gargolye
+265>地獄守門犬的爪
+266>Talon of Cerberus
+267>幼龍的爪
+268>Talon of Baby Dragon
+269>寶石怪獸的尾巴
+270>Tail of Carbuncle
+271>奧蘭的戒指
+272>Oran's Ring
+273>[trade]
+274>奧蘭的發簪
+275>Oran's Hairpin
+276>小矮妖的錘子
+277>Mallet of Leprechaun
+278>小矮妖的帽子
+279>Hat of Leprechaun
+280>奪心魔的手
+281>Hand of Illithid
+282>天空寶珠
+283>Sky's Bead
+284>Item/creature/artifact_blue.img
+285>[artifact blue]
+286>[creature magical critical hit]
+287>SKIN_TOUCH
+288>??????? ????
+289>Artifect Blue
+290>Item/IconAcc.img
+291>Item/FieldImage.img
+292>[creature skill consume mp rate]
+293>[creature skill charge time rate]
+294>[creature skill over charge time rate]
+295>[creature experience amount rate]
+296>[creature physical critical hit]
+297>[creature stuck]
+298>NECKLACE_TOUCH
+299>撒共
+300>[trade delete]
+301>[minimum level]
+302>item/creature/creature.img
+303>item/fieldimage.img
+304>[creature]
+305>[creature species]
+306>[output index]
+307>[MP MAX rate]
+308>[magical attack]
+309>[stuck]
+310>CREATURE_EQUIP_TOUCH
+311>華利弗
+312>[cast speed]
+313>星光獨角獸
+314>[explain]
+315>    頭上有只角， 身后有尾巴！ 你看~我的角還會發光哦！ 而且我還有兩個翅膀， 呼哧呼哧~我要飛上天空！
+316>淘气虎
+317>[move speed]
+318>[attack speed]
+319>可愛虎
+320>[physical attack]
+321>[physical defense]
+322>[magical defense]
+323>精靈之哥布林
+324>變身為精靈之哥布林士兵協助戰斗， 變身效果持續30秒。 變身時， 會隨机選擇哥布林的變身种類。 (1:哥布林護衛， 2:哥布林佣兵， 3:哥布林突擊隊長， 4:哥布林大族長)
+325>[physical critical hit]
+326>[magical critical hit]
+327>[MP regen speed]
+328>乘雪橇的叮叮
+329>乘雪橇的鐺鐺
+330>紅色吉祥熊貓
+331>[MP MAX]
+332>勞姆
+333>菲尼克斯
+334>[all elemental resistance]
+335>佛爾卡斯
+336>納扎魯
+337>瑪巴斯
+338>寵物蛋 (貝雷斯) 
+339>An Egg of Belz
+340>[sealing trade]
+341>item/creature/creature_egg.img
+342>CREATURE_EGG_TOUCH
+343>寵物蛋 (巴拉姆)
+344>An Egg of Balam
+345>寵物蛋 (亞米) 
+346>An Egg of Amy
+347>[inventory limit]
+348>大地之哥布林
+349>變身為大地之哥布林士兵協助戰斗， 變身效果持續30秒。 變身時， 會隨机選擇哥布林的變身种類。 (1:哥布林護衛， 2:哥布林佣兵， 3:哥布林突擊隊長， 4:哥布林大族長)
+350>迷你哥布林
+351>    勇敢的冒險家們成功地擊退了入侵雪山的怪物~冰冷的雪山終於又恢復了往日的平靜……
+352>兔精靈衛隊長月蟬
+353>兔精靈戰士靈芸
+354>金毛球
+355>波堤斯
+356>金錢兔
+357>波比
+358>可以改變角色的聊天泡泡形狀
+359>藍色吉祥熊貓
+360>[HP MAX]
+361>比利士
+362>[hit recovery]
+363>貝雷斯普特
+364>貝雷斯普
+365>貝雷斯
+366>僵尸之力手杖
+367>Zombie Powder Wand
+368>[basic explain]
+369>施放[驅使僵尸]時， 有10%%的几率召喚出1只叢林僵尸。
+370>[detail explain]
+371>    施放[驅使僵屍]時， 有10%%的幾率召喚出1只Lv40的叢林僵屍協助召喚者攻擊敵人， 叢林僵屍存在60秒。 (召喚的怪物只能同時存在1只， 若召喚的怪物受到較大傷害， 則召喚時間結束前就會消失)
+372>[sealing]
+373>[item group name]
+374>wand
+375>[thief]
+376>Item/weapon/thief/wand.img
+377>Item/field_weapon.img
+378>[durability]
+379>[value]
+380>[equipment physical attack]
+381>[equipment magical attack]
+382>[if]
+383>[cooltime]
+384>[use skill]
+385>thief
+386>[/if]
+387>[then]
+388>[target]
+389>myself
+390>[duration]
+391>[probability]
+392>[summon monster]
+393>[/then]
+394>[skill levelup]
+395>[/skill levelup]
+396>[variation]
+397>[layer variation]
+398>wandc
+399>[equipment ani script]
+400>equipment/character/thief.lay
+401>wandd
+402>wandx
+403>WAND_TOUCH
+404>木手杖
+405>Wooden Wand
+406>手杖
+407>Wand
+408>破舊的木手杖
+409>Used Wooden Wand
+410>傳承 : 玄冰精靈的黃昏手杖
+411>Legacy : Iduas of Marid
+412>[spectrum]
+413>[icon mark]
+414>Item/IconMark.img
+415>[repair price]
+416>[elemental property]
+417>[water element]
+418>[Force Result Item Rule]
+419>馬克納贊
+420>Macnazan
+421>[anti evil]
+422>深淵催眠曲
+423>Lullaby of Abyss
+424>攻擊時， 有2%%的几率使敵人進入睡眠狀態。\n攻擊速度 +2%%
+425>    攻擊時， 有2%%的幾率使敵人進入睡眠狀態5秒。 (若敵人高於Lv50， 則減少進入異常狀態的幾率和效果； 反之， 則增加幾率和效果)\n攻擊速度 +2%%
+426>[sleep resistance]
+427>[attack success]
+428>enemy
+429>[active status]
+430>sleep
+431>羅格納手杖
+432>Logna Demos
+433>傳承 : 黑暗天使的獸骨手杖
+434>Legacy : Wand of Layla
+435>攻擊時， 有3%%的几率使敵人進入中毒狀態。
+436>    攻擊時， 有3%%的幾率使敵人進入中毒狀態10秒； 中毒狀態下的敵人， 每0.5秒受到102點傷害。 (若敵人高於Lv35， 則減少進入異常狀態的幾率； 反之， 則增加幾率)
+437>[HP regen speed]
+438>poison
+439>傳承 : 复魂天使的木乃伊手杖
+440>Legacy : Mummy Wand of Lauvi
+441>攻擊時， 有3%%的几率使敵人進入石化狀態。
+442>    攻擊時， 有3%%的幾率使敵人進入石化狀態6秒； 石化狀態解除時， 可以使敵人受到385點傷害。 (若敵人高於Lv40， 則減少進入異常狀態的幾率和效果； 反之， 則增加幾率和效果)
+443>stone
+444>真 · 庫塔里奧手杖
+445>Shin : Kuntario Wand
+446>[special monster drop]
+447>[difficulty for extra drop]
+448>[hero]
+449>[/difficulty for extra drop]
+450>[dungeon type for extra drop]
+451>[/dungeon type for extra drop]
+452>庫塔里奧手杖
+453>Kuntario Wand
+454>古蘭經手杖
+455>Korobatin
+456>凱拉祖瑪
+457>Kilajooma
+458>傳承 : 水魔碧靈之手杖
+459>Legacy : Wand of Kelpie
+460>古老的統治者權杖
+461>Low-Cost Regent Wand
+462>無法進行強化、 增幅、 分解和贈送。\n攻擊速度 +1%%
+463>[impossible contents]
+464>upgrade
+465>amplify upgrade
+466>disjoint
+467>gift
+468>[/impossible contents]
+469>杰卡拉手杖
+470>Jakara Wand
+471>不屈之志黃昏手杖
+472>Indomitable Iduas
+473>攻擊速度 -1%%
+474>[dark element]
+475>高科技祭祀手杖
+476>Hightech Gud Rota
+477>黃昏手杖
+478>Iduas
+479>复仇的邪念手杖
+480>Evil Mind of Revenge Wand
+481>[emancipate]
+482>[input]
+483>[/input]
+484>[output]
+485>[/output]
+486>[emancipate explain]
+487>物防小幅增加\n魔攻小幅增加\n屬性小幅提升\n抗魔值 +30\n施放速度 +2%%
+488>[/emancipate]
+489>[part set index]
+490>地獄蛛絲手杖
+491>Avernus Cobweb Wand
+492>神之怒擊手杖 : [降臨 : 尼古拉斯]
+493>Wand of Blow : Summon Nicolas
+494>[降臨 : 尼古拉斯]攻擊力 +14%%
+495>[skill data up]
+496>[dungeon type]
+497>[level]
+498>%
+499>[/skill data up]
+500>伏都教徒手杖
+501>Vodun Master Wand
+502>加持的秘技之境手杖 : [死靈之怨]
+503>Wand of Powerful Characteristic : Blame of Dead
+504>[死靈之怨]敵人減速狀態持續時間 +18%%
+505>加持的殘忍之弒手杖 : [巴拉克的憤怒]
+506>Wand of Powerful Fierce Attack : Guillotine
+507>[巴拉克的憤怒]冷卻時間 -18%%\n[巴拉克的憤怒]MP消耗量 -18%%
+508>[mp]
+509>加持的神之怒擊手杖 : [巴拉克的憤怒]
+510>Wand of Powerful Blow : Guillotine
+511>[巴拉克的憤怒]攻擊力 +18%%
+512>加持的秘技之境手杖 : [降臨 : 暴君巴拉克]
+513>Wand of Powerful Characteristic : Apport Ballacre
+514>[降臨 : 暴君巴拉克]殺戮亂舞、 破碎拳攻擊力 +18%%
+515>加持的時光之隙手杖 : [降臨 : 暴君巴拉克]
+516>Wand of Powerful Efficiency : Apport Ballacre
+517>[降臨 : 暴君巴拉克]普通攻擊時MP消耗量 -10%%
+518>[need material]
+519>加持的神之怒擊手杖 : [降臨 : 暴君巴拉克]
+520>Wand of Powerful Blow : Apport Ballacre
+521>[降臨 : 暴君巴拉克]普通攻擊力 +18%%
+522>加持的殘忍之弒手杖 : [驅使僵尸]
+523>Wand of Powerful Fierce Attack : Nicolas Summon Zombie
+524>[驅使僵尸]冷卻時間 -18%%\n[驅使僵尸]MP消耗量 -18%%
+525>加持的神之怒擊手杖 : [驅使僵尸]
+526>Wand of Powerful Blow : Nicolas Summon Zombie
+527>[驅使僵尸]攻擊力 +18%%
+528>加持的殘忍之弒手杖 : [死靈之怨]
+529>Wand of Powerful Fierce Attack : Blame of Dead
+530>[死靈之怨]冷卻時間 -18%%\n[死靈之怨]MP消耗量 -18%%
+531>殘忍之弒手杖 : [暗魂波]
+532>Wand of Fierce Attack : Dark Soul
+533>[暗魂波]冷卻時間 -10%%\n[暗魂波]MP消耗量 -10%%
+534>加持的神之怒擊手杖 : [死靈之怨]
+535>Wand of Powerful Blow : Blame of Dead
+536>[死靈之怨]攻擊力 +18%%
+537>加持的時光之源手杖 : [降臨 : 尼古拉斯]
+538>Wand of Powerful Unkeep : Summon Nicolas
+539>[降臨 : 尼古拉斯]HP最大值 +18%%\n[降臨 : 尼古拉斯]持續時間 +18%%
+540>克魯迪亞
+541>Quideta
+542>twinswd
+543>Item/weapon/thief/twinswd.img
+544>twinswordc
+545>twinswordd
+546>twinswordx
+547>TWINSWD_TOUCH
+548>合金雙劍
+549>Philif Twin Sword
+550>古老的玄鐵雙劍
+551>Old Steel Twin Sword
+552>古老的鐵質雙劍
+553>Old Slicer
+554>古老的碎骨雙劍
+555>Old Bone Twins
+556>諾蒂疾影刃
+557>Notiperia
+558>飛奴雙劍
+559>Norperon
+560>傳承 : 玄月精靈的合金雙劍
+561>Legacy : Philif of Nitras
+562>[light element]
+563>傳承 : 月影天使的環形雙劍
+564>Legacy : Rotar of Nanai
+565>攻擊時， 有2%%的几率附加100點傷害。
+566>[add absolute damage]
+567>all
+568>+
+569>傳承 : 神秘的水魔碧靈之雙劍
+570>Legacy : Mystery Twins of Kelpie
+571>攻擊速度 +2%%
+572>傳承 : 神秘的銀湖水仙之雙劍
+573>Legacy : Mystery Twinsword of Asrai
+574>馬特拉斯
+575>Matlas
+576>傳承 : 玄冰精靈的艾扎克雙劍
+577>Legacy : Izac of Marid
+578>瘋狂的空戰者
+579>Mad Air Rider
+580>攻擊時， 有2%%的几率使敵人進入減速狀態。\n跳躍攻擊傷害 +10%%
+581>攻擊時， 有2%%的几率使敵人進入減速狀態12秒； 減速狀態下的敵人， 將減少15%%的移動速度和攻擊速度。 (若敵人高于Lv50， 則減少進入异常狀態的几率和效果； 反之， 則增加几率和效果)\n跳躍攻擊傷害 +10%% (在決斗場中 +5%%)
+582>slow
+583>[my state]
+584>jump attack
+585>[pvp]
+586>[/pvp]
+587>傳承 : 水魔碧靈之雙劍
+588>Legacy : Twins of Kelpie
+589>古老的馬特拉斯
+590>Low-Cost Matlas
+591>無法進行強化、 增幅、 分解和贈送。
+592>傳承 : 智慧天使的純銀雙劍
+593>Legacy : Silver Twins of Acaia
+594>攻擊時， 有2%%的几率使敵人進入冰凍狀態。
+595>    攻擊時， 有2%%的幾率使敵人進入冰凍狀態6秒。 (若敵人高於Lv40， 則減少進入異常狀態的幾率和效果； 反之， 則增加幾率和效果)
+596>freeze
+597>民兵隊長的血影劍
+598>Blood  Twinsword of Militia Captain
+599>攻擊時， 有3%%的几率消耗自身5%%的HP， 從而召喚出3個民兵隊員協助自身進行戰斗， 民兵隊員存在7秒； 同時增加自身20%%的物攻和物防。\n(在決斗場中無效)
+600>[flavor text]
+601>    我在戰場上從不恐懼， 因為我的身邊有一群可靠的戰友。  --民兵隊長
+602>[module]
+603>[/module]
+604>[stat change]
+605>hp
+606>>
+607>[restore]
+608>[stat]
+609>equipment physical attack
+610>equipment physical defense
+611>殘忍之弒雙劍 : [螺旋穿刺]
+612>Twinsword of Fierce Attack : Vertical Spiral
+613>[螺旋穿刺]冷卻時間 -14%%\n[螺旋穿刺]MP消耗量 -14%%
+614>物防小幅增加\n魔攻小幅增加\n屬性小幅提升\n抗魔值 +30\n攻擊速度 +2%%
+615>神之怒擊雙劍 : [螺旋穿刺]
+616>Twinsword of Blow : Vertical Spiral
+617>[螺旋穿刺]攻擊力 +14%%
+618>神之怒擊雙劍 : [終結追擊]
+619>Twinsword of Blow : Hit End
+620>[終結追擊]攻擊力 +14%%
+621>[static]
+622>時光之源雙劍 : [弧光閃]
+623>Twinsword of Unkeep : Shining Cut
+624>[弧光閃]敵人僵直時間 +14%%
+625>殘忍之弒雙劍 : [弧光閃]
+626>Twinsword of Fierce Attack : Shining Cut
+627>[弧光閃]冷卻時間 -14%%\n[弧光閃]MP消耗量 -14%%
+628>神之怒擊雙劍 : [弧光閃]
+629>Twinsword of Blow : Shining Cut
+630>[弧光閃]攻擊力 +14%%
+631>無盡追擊雙劍
+632>Endless Chain Twinsword
+633>無限風暴雙劍
+634>Unstoppable Storm Twinsword
+635>秘技之境雙劍 : [翔擊]
+636>Twinsword of Characterisitc : Rising Cut
+637>[翔擊]的[終結追擊]攻擊力 +14%%
+638>冰目之諜雙劍
+639>Spy of Frozen Eyelight Twinsword
+640>加持的禁錮之限雙劍 : [絕命瞬獄殺]
+641>Twinsword of Powerful Enlargement : Excel Strike
+642>[絕命瞬獄殺]范圍 +8%%
+643>加持的殘忍之弒雙劍 : [絕命瞬獄殺]
+644>Twinsword of Powerful Fierce Attack : Excel Strike
+645>[絕命瞬獄殺]冷卻時間 -18%%\n[絕命瞬獄殺]MP消耗量 -18%%
+646>加持的神之怒擊雙劍 : [絕命瞬獄殺]
+647>Twinsword of Powerful Blow : Excel Strike
+648>[絕命瞬獄殺]攻擊力 +18%%
+649>加持的秘技之境雙劍 : [螺旋穿刺]
+650>Twinsword of Powerful Characterisitc : Vertical Spiral
+651>[螺旋穿刺]旋轉攻擊時多段攻擊次數 +2\n[螺旋穿刺]攻擊力 -3%%
+652>藍色火辣超短裙
+653>Blue Bustier Hot Pants
+654>item/avatar/thief/th_apants.img
+655>[pants avatar]
+656>[avatar type select]
+657>[/avatar type select]
+658>pants_d
+659>CLOTH_TOUCH
+660>[avatar select ability]
+661>[EQUIPMENT_PHYSICAL_DEFENSE]
+662>[/avatar select ability]
+663>紅色火辣超短裙
+664>Red Bustier Hot Pants
+665>黃色火辣超短裙
+666>Yellow Bustier Hot Pants
+667>黑色火辣超短裙
+668>Black Bustier Hot Pants
+669>白色狂野短裙
+670>White Goth Skirt
+671>pants_a
+672>紫色狂野短裙
+673>Purple Goth Skirt
+674>紅色狂野短裙
+675>Red Goth Skirt
+676>黑色狂野短裙
+677>Black Goth Skirt
+678>三月兔的紫色短裙
+679>Darkalice Spade Skirt
+680>三月兔  套裝 2
+681>pants_b
+682>[SKILL_LEVEL]
+683>[common]
+684>三月兔的紅色短裙
+685>Darkalice Heart Skirt
+686>三月兔  套裝 1
+687>粉色九尾妖姬短褲
+688>Dalgi's Pink Silk Short Pants
+689>九尾妖姬  套裝 4
+690>金色九尾妖姬短褲
+691>Dalgi's Gold Silk Short Pants
+692>九尾妖姬  套裝 3
+693>黑色九尾妖姬短褲
+694>Dalgi's Black Silk Short Pants
+695>九尾妖姬  套裝 2
+696>紅色九尾妖姬短褲
+697>Dalgi's Red Silk Short Pants
+698>九尾妖姬  套裝 1
+699>紅色暗月勇士短裙
+700>Dark Moon Warrior's Red Skirt
+701>    作為格鬥界的新星， 你的未來無限光明！  --2011年第四屆全國格鬥大賽
+702>[avatar func filter]
+703>銀色疾月戰士短裙
+704>Meteoric Moon Warrior's Silver Skirt
+705>    煉就格鬥之魂， 需要擁有執著的熱情與永不言敗的信念。  --2011年第四屆全國格鬥大賽
+706>白色羽絨短褲
+707>White Mink Short Pants
+708>紅色羽絨短褲
+709>Red Mink Short Pants
+710>黑色羽絨短褲
+711>Black Mink Short Pants
+712>白色暗夜學院格子裙
+713>White Check Skirt
+714>深藍色暗夜學院格子裙
+715>Navy Check Skirt
+716>褐色暗夜學院格子裙
+717>Brown Check Skirt
+718>紅色暗夜學院格子裙
+719>Red Check Skirt
+720>黑色夏季校服裙
+721>Black Pleated Skirt
+722>[usable period]
+723>黃色潮人緊身褲
+724>Yellow Leather Tight Pants
+725>白色潮人緊身褲
+726>White Leather Tight Pants
+727>紫色潮人緊身褲
+728>Purple Leather Tight Pants
+729>黑色潮人緊身褲
+730>Black Leather Tight Pants
+731>可口可樂迷你裙
+732>Coke Avatar Mini Skirt
+733>[jump power]
+734>[room list move speed rate]
+735>藍色緊身七分褲
+736>Blue Denim Three-Quarter Length Pants
+737>白色緊身七分褲
+738>White Denim Three-Quarter Length Pants
+739>紅色流浪者落葉裙
+740>Fighter Red Pants
+741>白色夏季校服裙
+742>White Pleated Skirt
+743>褐色夏季校服裙
+744>Brown Pleated Skirt
+745>藍色夏季校服裙
+746>Blue Pleated Skirt
+747>粉色浪漫花朵耳墜
+748>Romantic Pink Flower Earring
+749>item/avatar/thief/th_aface.img
+750>[face avatar]
+751>face_c
+752>face_b
+753>[EQUIPMENT_MAGICAL_DEFENSE]
+754>[ACTIVESTATUS_TOLERANCE_ALL]
+755>[ATTACK_SPEED]
+756>[HIT_RECOVERY]
+757>紅色浪漫花朵耳墜
+758>Romantic Red Flower Earring
+759>藍色浪漫花朵耳墜
+760>Romantic Blue Flower Earring
+761>黑色浪漫花朵耳墜
+762>Romantic Black Flower Earring
+763>藍色水滴形优雅耳墜
+764>Blue Waterdrop Earring
+765>粉色水滴形优雅耳墜
+766>Pink Waterdrop Earring
+767>橙色水滴形优雅耳墜
+768>Orange Waterdrop Earring
+769>紫色水滴形优雅耳墜
+770>Purple Waterdrop Earring
+771>藍色簡約休閑耳環
+772>Blue Ring Earring
+773>face_a
+774>綠色簡約休閑耳環
+775>Green Ring Earring
+776>銀色簡約休閑耳環
+777>Silver Ring Earring
+778>金色簡約休閑耳環
+779>Gold Ring Earring
+780>藍色誘惑菱形彩繪
+781>Mystic Blue Bindi
+782>米內特的綠色玉珠耳墜
+783>Minet Gold Mint Earring
+784>2011年春節裝扮套裝 1 (暗夜使者)
+785>女神的粉色嵌珠耳環
+786>Spinel Earring of Court Lady
+787>2010年國慶節裝扮套裝(暗夜使者4)
+788>女神的黑色嵌珠耳環
+789>Black Diamond of Court Lady
+790>2010年國慶節裝扮套裝(暗夜使者3)
+791>女神的紫色嵌珠耳環
+792>Amethyst Earring of Court Lady
+793>2010年國慶節裝扮套裝(暗夜使者2)
+794>女神的紅色嵌珠耳環
+795>Ruby Earring of Court Lady
+796>2010年國慶節裝扮套裝(暗夜使者1)
+797>藍色糖果耳環
+798>Blue Candy Earring
+799>2010年夏日禮包 4 (暗夜使者)
+800>紅色糖果耳環
+801>Red Candy Earring
+802>2010年夏日禮包 3 (暗夜使者)
+803>黃色糖果耳環
+804>Yellow Candy Earring
+805>2010年夏日禮包 2 (暗夜使者)
+806>粉色糖果耳環
+807>Pink Candy Earring
+808>2010年夏日禮包 1 (暗夜使者)
+809>黃金月舞玄翎耳環
+810>Lucid Golden Imperial Earring
+811>暗黑月舞玄翎耳環
+812>Lucid Dark Imperial Earring
+813>紅色清新靚麗耳墜
+814>Simple Red Earring
+815>紫色清新靚麗耳墜
+816>Simple Purple Earring
+817>金色清新靚麗耳墜
+818>Simple Gold Earring
+819>白色清新靚麗耳墜
+820>Simple White Earring
+821>黑色櫻桃耳環
+822>Black Cherry Earring
+823>紅色媚惑口紅
+824>Fascination Red Lipstick
+825>粉色媚惑口紅
+826>Fascination Pink Lipstick
+827>藍色玉珠耳墜
+828>Blue Gem Earring
+829>黃色玉珠耳墜
+830>Yellow Gem Earring
+831>紅色玉珠耳墜
+832>Red Gem Earring
+833>綠色玉珠耳墜
+834>Green Gem Earring
+835>紅色复古眼鏡
+836>Polished Red Glass
+837>紫色复古眼鏡
+838>Gracefull Purple Glass
+839>褐色复古眼鏡
+840>Sharp Brown Glass
+841>黑色复古眼鏡
+842>Smart Black Glass
+843>紅色暗月精靈胸甲
+844>Red Coat of Necromancer
+845>item/avatar/thief/th_acoat.img
+846>coat_a
+847>coat_d
+848>黑色暗月精靈胸甲
+849>Black Coat of Necromancer
+850>藍色火辣緊身抹胸
+851>Blue Bustier Top
+852>coat_c
+853>紅色火辣緊身抹胸
+854>Red Bustier Top
+855>黃色火辣緊身抹胸
+856>Yellow Bustier Top
+857>黑色火辣緊身抹胸
+858>Black Bustier Top
+859>白色狂野露肩上衣
+860>White Goth Top
+861>紫色狂野露肩上衣
+862>Purple Goth Top
+863>紅色狂野露肩上衣
+864>Red Goth Top
+865>黑色狂野露肩上衣
+866>Black Goth Top
+867>三月兔的紫色禮服
+868>Darkalice Purple Coat
+869>coat_b
+870>[set name]
+871>[set item]
+872>[/set item]
+873>[set ability]
+874>[fullset explain]
+875>    攻擊或施放技能時， 有3%%的几率發動隨机Buff。
+876>[attack success effect animation]
+877>Common/Etc/Animation/2012_Labor_day_Body.ani
+878>Common/Etc/Animation/2012_Labor_day_Body_Effect.ani
+879>Common/Etc/Animation/2012_Labor_day_Effect.ani
+880>[multiple then]
+881>[aura]
+882>[then probability]
+883>[/multiple then]
+884>[casting]
+885>[pvp type]
+886>[/set ability]
+887>三月兔的紅色禮服
+888>Darkalice Red Coat
+889>粉色九尾妖姬舞衣
+890>Dalgi's Pink Silk Top
+891>Common/Etc/Animation/2012new_year_Body.ani
+892>Common/Etc/Animation/2012new_year_Effect1.ani
+893>Common/Etc/Animation/2012new_year_Effect2.ani
+894>金色九尾妖姬舞衣
+895>Dalgi's Gold Silk Top
+896>黑色九尾妖姬舞衣
+897>Dalgi's Black Silk Top
+898>紅色九尾妖姬舞衣
+899>Dalgi's Red Silk Top
+900>粉色緊身馬甲
+901>Layered Pink Best
+902>紫色緊身短衣
+903>Deep Purple Mink Top
+904>白色緊身短衣
+905>White Mink Top
+906>紅色緊身短衣
+907>Red Mink Top
+908>黑色緊身短衣
+909>Black Mink Top
+910>黑色暗夜學院校服
+911>Black Coat
+912>紅色暗夜學院校服
+913>Red Coat
+914>深藍色暗夜學院校服
+915>Navy Coat
+916>黃色暗夜學院校服
+917>Yellow Coat
+918>褐色夏季校服上衣
+919>Brown School Uniform Coat
+920>黃色潮人緊身夾克
+921>Yellow Leather Tight Jacket
+922>白色潮人緊身夾克
+923>White Leather Tight Jacket
+924>紫色潮人緊身夾克
+925>Purple Leather Tight Jacket
+926>黑色潮人緊身夾克
+927>Black Leather Tight Jacket
+928>可口可樂條紋背心
+929>Coke Avatar Top
+930>[hide equipment]
+931>[neck avatar]
+932>[/hide equipment]
+933>[hide layer]
+934>[/hide layer]
+935>流光魅月魔音胸甲
+936>Bright Ghost Breath Leather Coat
+937>暗影魅月魔音胸甲
+938>Dark Ghost Breath Leather Coat
+939>name_1760025
+940>name2_1760025
+941>黑色阿拉伯裹胸衣
+942>Black Arabia Coat
+943>紅色阿拉伯裹胸衣
+944>Red Arabia Coat
+945>金色阿拉伯裹胸衣
+946>Gold Arabia Coat
+947>銀色阿拉伯裹胸衣
+948>Silver Arabia Coat
+949>黃色鉤花比基尼上衣
+950>Yellow Crochet Coat
+951>紅色鉤花比基尼上衣
+952>Red Crochet Coat
+953>白色鉤花比基尼上衣
+954>White Crochet Coat
+955>黑色鉤花比基尼上衣
+956>Black Crochet Coat
+957>黃色性感束腰背心
+958>Yellow Sexy Top
+959>紅色性感束腰背心
+960>Red Sexy Top
+961>黑色性感束腰背心
+962>Black Sexy Top
+963>白色性感束腰背心
+964>White Sexy Top
+965>黃色流浪者露臍背心
+966>Fighter Yellow Top
+967>白色舞動少女禮帽
+968>Romantic White Hat
+969>item/avatar/thief/th_acap.img
+970>cap_a
+971>[MAGICAL_ATTACK]
+972>[MAGICAL_DEFENSE]
+973>[HP_REGENRATE]
+974>[MP_REGENRATE]
+975>[CAST_SPEED]
+976>金色舞動少女禮帽
+977>Romantic Gold Hat
+978>藍色舞動少女禮帽
+979>Romantic Blue Hat
+980>黑色舞動少女禮帽
+981>Romantic Black Hat
+982>黑色九尾妖姬頭飾
+983>Dalgi's Ear of Black Fox
+984>cap_b
+985>白色九尾妖姬頭飾
+986>Dalgi's Ear of White Fox
+987>紅色暗月勇士頭盔
+988>Dark Moon Warrior's Red Breast Circlet
+989>cap_d
+990>銀色疾月戰士頭盔
+991>Meteoric Moon Warrior's Silver Circlet
+992>黃金冥月斗士頭盔
+993>Moon Warrior's Gold Circlet
+994>    要成為格鬥之王， 除了擁有非凡的操作技術之外， 還要有廣闊的胸襟、 公正的姿態以及一顆勇敢的心。  --2011年第四屆全國格鬥大賽
+995>誘惑之梅杰茵的藍色發飾
+996>Mary Jane's Blue Butterfly Deco
+997>誘惑之梅杰茵套裝 2
+998>誘惑之梅杰茵的紅色發飾
+999>Mary Jane's Red Butterfly Deco
+1000>誘惑之梅杰茵套裝 1
+1001>白色妖月魅影軍帽
+1002>White Alanna Uniform Hat
+1003>帝國的勇士 4 (暗夜使者)
+1004>藍色妖月魅影軍帽
+1005>Blue Alanna Uniform Hat
+1006>帝國的勇士 3 (暗夜使者)
+1007>紅色妖月魅影軍帽
+1008>Red Alanna Uniform Hat
+1009>帝國的勇士 2 (暗夜使者)
+1010>黑色妖月魅影軍帽
+1011>Black Alanna Uniform Hat
+1012>帝國的勇士 1 (暗夜使者)
+1013>米內特的紅瑩玫瑰發卡
+1014>Minet Red Rose Hair Pin
+1015>2011年春節裝扮套裝 2 (暗夜使者)
+1016>米內特的綠瑩玫瑰發卡
+1017>Minet Mint Rose Hair Pin
+1018>女神的粉色尊貴發簪
+1019>Red Hair Decoration of Court Lady
+1020>女神的黑色尊貴發簪
+1021>女神的紫色尊貴發簪
+1022>紅色一字夾
+1023>Red Single Pin
+1024>綠色一字夾
+1025>Green Single Pin
+1026>紫紅色一字夾
+1027>Claret Single Pin
+1028>稀有克隆裝扮帽子 (暗夜使者)
+1029>Rare Cap Clone Avatar
+1030>    可以復制穿戴中的裝扮款式， 但屬性值保留克隆裝扮原有的屬性。 如果裝扮欄中存在被復制的裝扮， 則該克隆裝扮的款式一直保留復制後的款式。 但是， 如果被復制的裝扮不在裝扮欄， 則下次重新登錄遊戲時克隆裝扮的款式變為最基本款式(不穿裝扮時一樣的款式)。
+1031>[clear avatar]
+1032>item/avatar/common/IconClone.img
+1033>[extra icon]
+1034>item/avatar/common/IconCloneCover.img
+1035>name_1720000
+1036>name2_1720000
+1037>name_1720080
+1038>name2_1720080
+1039>name_1720072
+1040>name2_1720072
+1041>basic_explain_1720072
+1042>cap_c
+1043>[character name y revision]
+1044>name_1720071
+1045>name2_1720071
+1046>basic_explain_1720071
+1047>name_1720070
+1048>name2_1720070
+1049>basic_explain_1720070
+1050>name_1720069
+1051>name2_1720069
+1052>basic_explain_1720069
+1053>藍色迷月公主羽飾
+1054>Blue Arabia Princess Plumage Circlet
+1055>2011夏日禮包 4 (暗夜使者)
+1056>黑色迷月公主羽飾
+1057>Black Arabia Princess Plumage Circlet
+1058>2011夏日禮包 3 (暗夜使者)
+1059>金色迷月公主羽飾
+1060>Gold Arabia Princess Plumage Circlet
+1061>2011夏日禮包 2 (暗夜使者)
+1062>銀色迷月公主羽飾
+1063>Silver Arabia Princess Plumage Circlet
+1064>2011夏日禮包 1 (暗夜使者)
+1065>name_1720064
+1066>name2_1720064
+1067>basic_explain_1720064
+1068>[special ability]
+1069>[chat emoticon index]
+1070>name_1720063
+1071>name2_1720063
+1072>basic_explain_1720063
+1073>土罐的頭盔 (暗夜使者)
+1074>Jar of Danjin
+1075>火罐的頭盔 (暗夜使者)
+1076>Jar of Manjin
+1077>金罐的頭盔 (暗夜使者)
+1078>Jar of Kadin
+1079>水罐的頭盔 (暗夜使者)
+1080>Jar of Pokin
+1081>木罐的頭盔 (暗夜使者)
+1082>Jar of Arin
+1083>黑色靚麗太陽鏡
+1084>Black Top Sunglass
+1085>紅色靚麗太陽鏡
+1086>Red Top Sunglass
+1087>藍色靚麗太陽鏡
+1088>Blue Top Sunglass
+1089>紫色靚麗太陽鏡
+1090>Purple Top Sunglass
+1091>黃色桃心發卡
+1092>Yellow Plump Heart Pin
+1093>藍色桃心發卡
+1094>Blue Plump Heart Pin
+1095>紅色桃心發卡
+1096>Red Plump Heart Pin
+1097>綠色桃心發卡
+1098>Green Plump Heart Pin
+1099>黃色流浪者發帶
+1100>Fighter Yellow Hair Band
+1101>橙色時尚牛仔皮腰帶
+1102>Cowgirl Orange Leather Belt
+1103>item/avatar/thief/th_abelt.img
+1104>[waist avatar]
+1105>belt_c
+1106>SCRAP_TOUCH
+1107>[ELEMENT_TOLERANCE_FIRE]
+1108>[ELEMENT_TOLERANCE_WATER]
+1109>[ELEMENT_TOLERANCE_DARK]
+1110>[ELEMENT_TOLERANCE_LIGHT]
+1111>[ACTIVESTATUS_TOLERANCE_STUCK]
+1112>[INVENTORY_MAX_WEIGHT]
+1113>橙色西域武士腰帶
+1114>Orange Dagger Belt
+1115>金色西域武士腰帶
+1116>Gold Dagger Belt
+1117>黑色西域武士腰帶
+1118>Black Dagger Belt
+1119>紅色西域武士腰帶
+1120>Red Dagger Belt
+1121>藍色性感誘惑腰飾
+1122>Blue Ribbon Corsage
+1123>belt_d
+1124>白色性感誘惑腰飾
+1125>White Ribbon Corsage
+1126>紅色性感誘惑腰飾
+1127>Red Ribbon Corsage
+1128>紫色性感誘惑腰飾
+1129>Purple Ribbon Corsage
+1130>白色貓女誘惑腰飾
+1131>White Cat Leather Belt
+1132>藍色貓女誘惑腰飾
+1133>Blue Cat Leather Belt
+1134>紅色貓女誘惑腰飾
+1135>Red Cat Leather Belt
+1136>黑色貓女誘惑腰飾
+1137>Black Cat Leather Belt
+1138>黃水晶暗紋腰帶
+1139>Gold Jewel Belt of Necromancer
+1140>青金石暗紋腰帶
+1141>Blue Jewel Belt of Necromancer
+1142>祖母綠暗紋腰帶
+1143>Emerald Jewel Belt of Necromancer
+1144>精巧的泰拉石巨槌
+1145>Excellent Teranite Staff
+1146>攻擊時， 有1%%的几率使自身增加10%%的移動速度、 攻擊速度和施放速度； 并減少自身10%%的裝備防御力， 效果持續30秒。
+1147>    異變現象的產物， 由泰拉石煉制而成的武器， 隱含強大的能量！
+1148>club
+1149>[swordman]
+1150>Item/weapon/swordman/club.img
+1151>cast speed
+1152>attack speed
+1153>move speed
+1154>equipment magical defense
+1155>clubc
+1156>equipment/character/swordman.lay
+1157>clubb
+1158>STICK_TOUCH
+1159>泰拉石短棒
+1160>Teranite Staff
+1161>    異變現象的產物， 由泰拉石煉制而成的武器， 含有強大的能量！
+1162>羅丹的雕塑方錘
+1163>Rodin Darter
+1164>攻擊速度 +1%%
+1165>古老的蛇形槌
+1166>Old Hard Blow
+1167>傳承 : 懲罰天使之紫杉棒
+1168>Legacy : Blunt of Mumia
+1169>傳承 : 颶風精靈之紫杉棒
+1170>Legacy : Blunt of Meivan
+1171>攻擊時， 有2%%的几率使敵人進入混亂狀態。\n攻擊速度 +1%%
+1172>    攻擊時， 有2%%的幾率使敵人進入混亂狀態4秒。 (若敵人高於Lv35， 則減少進入異常狀態的幾率和效果； 反之， 則增加幾率和效果)\n攻擊速度 +1%%
+1173>[reduce duration to human armor at pvp module]
+1174>confuse
+1175>傳承 : 冥火精靈之龍骨棒
+1176>Legacy : Blunt of Efreet
+1177>[fire element]
+1178>傳承 : 憤怒精靈之龍骨棒
+1179>Legacy : Skull Crasher of Rantea
+1180>傳承 : 水魔碧靈之木槌
+1181>Legacy : Blunt of Kelpie
+1182>傳承 : 神秘的水魔碧靈之木槌
+1183>Legacy : Mystery Blunt of Kelpie
+1184>傳承 : 神秘的銀湖水仙之短木棒
+1185>Legacy : Mystery Blunt of Asrai
+1186>傳承 : 熾焰天使之釘頭槌
+1187>Legacy : Blunt of Rokel
+1188>攻擊時， 有2%%的几率附加50點傷害。
+1189>傳承 : 破坏天使的碎金棒
+1190>Legacy : Gold Crasher of Refrican
+1191>攻擊時， 有2%%的几率使敵人進入混亂狀態。
+1192>    攻擊時， 有2%%的幾率使敵人進入混亂狀態7秒； 但在決鬥場中， 只能持續3.5秒。 (若敵人高於Lv60， 則減少進入異常狀態的幾率和效果； 反之， 則增加幾率和效果)
+1193>[confuse resistance]
+1194>[reduce probability to human armor at pvp module]
+1195>傳承 : 暗影精靈之巨人槌
+1196>Legacy : Blunt of Reiden
+1197>傳承 : 銀湖水仙之短木棒
+1198>Legacy : Blunt of Asrai
+1199>傳承 : 迷蹤天使之碎骨棒
+1200>Legacy : Blunt of Aladis
+1201>攻擊時， 有2%%的几率使敵人進入束縛狀態。\n攻擊速度 +1%%
+1202>    攻擊時， 有2%%的幾率使敵人進入束縛狀態6秒。 (若敵人高於Lv40， 則減少進入異常狀態的幾率和效果； 反之， 則增加幾率和效果)\n攻擊速度 +1%%
+1203>hold
+1204>(舊) 古老的蛇形槌
+1205>(舊) 蛇形槌
+1206>Hard Blow
+1207>破舊的金碎棒
+1208>Outdated Gold Crasher
+1209>金碎棒
+1210>Gold Crasher
+1211>(舊) 猛毒爪牙棒

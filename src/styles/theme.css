@@ -28,10 +28,14 @@
     --vscode-shadow-md: 0 0 6px rgba(0, 0, 0, 0.08);
     --vscode-shadow-lg: 0 0 12px rgba(0, 0, 0, 0.14);
     /* 圆角与描边宽度（platform/theme/common/sizes/baseSizes.ts：
-     * cornerRadius.medium = 6px、cornerRadius.large = 8px、strokeThickness = 1px） */
+     * cornerRadius.medium = 6px、cornerRadius.large = 8px、cornerRadius.xLarge = 12px、strokeThickness = 1px） */
     --vscode-cornerRadius-medium: 6px;
     --vscode-cornerRadius-large: 8px;
+    --vscode-cornerRadius-xLarge: 12px;
     --vscode-strokeThickness: 1px;
+    /* 字号（platform/theme/common/sizes/baseSizes.ts:27-29 bodyFontSize.xSmall = 11px，新分级里等价于
+     * fontSize.body2；快速输入的分组分隔标签用它 —— quickInput.css:350） */
+    --vscode-bodyFontSize-xSmall: 11px;
 
     /* 活动栏（2026-dark.json） */
     --vscode-activityBar-background: #191a1b;
@@ -58,19 +62,30 @@
     --vscode-list-activeSelectionBackground: #ffffff22;
     --vscode-list-activeSelectionForeground: #ededed;
     --vscode-list-inactiveSelectionBackground: #2c2d2e;
+    --vscode-list-inactiveSelectionForeground: #ededed;
+    /* 焦点行（键盘导航停在的行）：2026-dark.json:65-66 覆盖了 registerColor 的 null 默认值
+       （listColors.ts:17-21），面包屑 picker 的当前符号行就是这一态 */
+    --vscode-list-focusBackground: #ffffff22;
+    --vscode-list-focusForeground: #bfbfbf;
     --vscode-list-focusOutline: #3994bcb3;
     --vscode-list-highlightForeground: #48a0c7;
     --vscode-tree-indentGuidesStroke: #585858;
+    /* tree.inactiveIndentGuidesStroke（listColors.ts:134-136 = transparent(#585858, 0.4)）：
+       树缩进参考线在鼠标悬停时的描边色（abstractTree.js:1823-1824 注入的规则） */
+    --vscode-tree-inactiveIndentGuidesStroke: rgba(88, 88, 88, 0.4);
 
     /* 编辑器 / 标签页（2026-dark.json） */
     --vscode-editor-background: #121314;
     --vscode-editor-foreground: #bbbebf;
     --vscode-editorGroup-border: #ffffff17;
-    --vscode-editorGroupHeader-tabsBackground: #191a1b;
+    /* 标签栏底色取 2026-dark.json:208（注意不是 tab.unfocusedInactiveBackground 的 #191A1B） */
+    --vscode-editorGroupHeader-tabsBackground: #202122;
     --vscode-editorGroupHeader-tabsBorder: #2a2b2c;
     --vscode-tab-activeBackground: #121314;
     --vscode-tab-unfocusedActiveBackground: #121314;
-    --vscode-tab-inactiveBackground: #191a1b;
+    /* tab.inactiveBackground 取 2026-dark.json:197 的 #202122（聚焦组）；
+       tab.unfocusedInactiveBackground = #191A1B（:206）本仓库尚不区分编辑器组焦点，故仅登记取值 */
+    --vscode-tab-inactiveBackground: #202122;
     --vscode-tab-unfocusedInactiveBackground: #191a1b;
     --vscode-tab-activeForeground: #bfbfbf;
     --vscode-tab-inactiveForeground: #8c8c8c;
@@ -88,6 +103,13 @@
     --vscode-tab-inactiveModifiedBorder: #3399cc80;
     /* workbench/common/theme.ts TAB_DRAG_AND_DROP_BORDER dark = TAB_ACTIVE_FOREGROUND */
     --vscode-tab-dragAndDropBorder: #bfbfbf;
+    /* Modern UI 标签（workbench/contrib/modernUI/browser/media/tabs.css:21 消费该 token）。
+       取值链为 registerColor 默认值：modernEditorTab.activeBackground
+       （workbench/common/theme.ts:717）→ modernTab.activeBackground（:707）
+       → list.inactiveSelectionBackground，主题 JSON 里只覆盖到最后一环
+       （2026-dark.json:59「list.inactiveSelectionBackground」= #2C2D2E），主题未自定义颜色时
+       由 modernTabColorCustomizations.ts:19-27 保持该默认值不变。 */
+    --vscode-modernEditorTab-activeBackground: #2c2d2e;
 
     /* 标题栏 / 菜单栏（2026-dark.json） */
     --vscode-titleBar-activeBackground: #191a1b;
@@ -95,6 +117,16 @@
     --vscode-titleBar-border: #2a2b2c;
     --vscode-menubar-selectionForeground: #bfbfbf;
     --vscode-menubar-selectionBackground: #242526;
+
+    /* 命令中心（workbench/common/theme.ts:818-872 的 commandCenter.* 注册；2026-dark.json:103-107、:257）。
+       注册默认值里 foreground = titleBar.activeForeground、activeForeground = menubar.selectionForeground，
+       2026-dark 把两者都覆盖为 #bfbfbf（比标题栏正文 #8c8c8c 更亮，命令中心因此是标题栏里最亮的一块）。 */
+    --vscode-commandCenter-foreground: #bfbfbf;
+    --vscode-commandCenter-activeForeground: #bfbfbf;
+    --vscode-commandCenter-background: #191a1b;
+    --vscode-commandCenter-activeBackground: #ffffff0f;
+    --vscode-commandCenter-border: #2e3031;
+    --vscode-commandCenter-activeBorder: #333536;
 
     /* 状态栏（2026-dark.json：与面板同为 #191A1B，强调色只出现在焦点边框等 1px 处） */
     --vscode-statusBar-background: #191a1b;
@@ -172,7 +204,73 @@
     /* 键盘导航时的菜单项描边（2026-dark.json；指针 hover 态由 :focus-visible 规则抑制） */
     --vscode-menu-selectionBorder: #3994bc;
     --vscode-editorWidget-background: #202122;
+    --vscode-editorWidget-foreground: #bfbfbf;
     --vscode-editorWidget-border: #2a2b2c;
+
+    /* 快速输入 / 命令面板（2026-dark.json:234-241；浮层本体与列表项的颜色）。
+       这些取值少一个都不行：`var(--vscode-<token>)` 在变量未定义时整条声明按无效丢弃，
+       缺少 quickInput.background 会让浮层背景退化成透明、缺少 quickInputList.focus*
+       会让当前项没有高亮底色 —— 即「样式错乱」的直接成因。 */
+    --vscode-quickInput-background: #202122; /* 2026-dark.json:236（注册默认值 editorWidget.background） */
+    --vscode-quickInput-foreground: #bfbfbf; /* :237（注册默认值 editorWidget.foreground） */
+    --vscode-quickInputList-focusBackground: #297aa0; /* :238 */
+    --vscode-quickInputList-focusForeground: #ffffff; /* :239 */
+    --vscode-quickInputList-focusIconForeground: #ffffff; /* :240 */
+    /* 快捷键标签（platform/theme/common/colors/inputColors.ts:212-226 的 dark 默认值；
+       2026-dark 经 dark_modern.json:56 覆盖 foreground = #CCCCCC，其余取默认值）。
+       权威由 keybindingLabel.ts:78/164-174 以内联样式写入，取值来自
+       platform/theme/browser/defaultStyles.ts:34-40 的 asCssVariable 映射。 */
+    --vscode-keybindingLabel-background: #8080802b;
+    --vscode-keybindingLabel-foreground: #cccccc;
+    --vscode-keybindingLabel-border: #33333399;
+    --vscode-keybindingLabel-bottomBorder: #44444499;
+    /* widget.shadow（platform/theme/common/colors/editorColors.ts:339-341 dark = transparent(black, .36)）：
+       快速输入里同时是快捷键标签描边的推导色（quickInput.css:421-426）。 */
+    --vscode-widget-shadow: #0000005c;
+
+    /* 面包屑（2026-dark.json:211-215 直接覆盖了这四个 token —— 注意不是用 registerColor 从
+       foreground 派生的默认值 editorColors.ts:365-382，主题文件里写的是不透明灰）：
+       breadcrumb.foreground = #8C8C8C（派生默认值才是 transparent(foreground, 0.8)）
+       breadcrumb.background = editorBackground → #121314
+       breadcrumb.focusForeground / breadcrumb.activeSelectionForeground = #bfbfbf
+       breadcrumbPicker.background = editorWidgetBackground → #202122（picker 浮层底色，
+       breadcrumbsPicker.ts:88-93 把它写进容器的 background） */
+    --vscode-breadcrumb-foreground: #8c8c8c;
+    --vscode-breadcrumb-background: #121314;
+    --vscode-breadcrumb-focusForeground: #bfbfbf;
+    --vscode-breadcrumb-activeSelectionForeground: #bfbfbf;
+    --vscode-breadcrumbPicker-background: #202122;
+
+    /* 符号图标（editor/contrib/symbolIcons/browser/symbolIcons.ts:12-113 的 registerColor：
+       十项显式给了 dark 色值，其余默认 foreground = editor.foreground；
+       2026-dark.json 未覆盖任何 symbolIcon.*）。取值与生成规则见
+       src/workbench/contrib/codeEditor/browser/symbolIcons.js。 */
+    --vscode-symbolIcon-fileForeground: #bbbebf;
+    --vscode-symbolIcon-moduleForeground: #bbbebf;
+    --vscode-symbolIcon-namespaceForeground: #bbbebf;
+    --vscode-symbolIcon-packageForeground: #bbbebf;
+    --vscode-symbolIcon-classForeground: #ee9d28;
+    --vscode-symbolIcon-methodForeground: #b180d7;
+    --vscode-symbolIcon-propertyForeground: #bbbebf;
+    --vscode-symbolIcon-fieldForeground: #75beff;
+    --vscode-symbolIcon-constructorForeground: #b180d7;
+    --vscode-symbolIcon-enumeratorForeground: #ee9d28;
+    --vscode-symbolIcon-interfaceForeground: #75beff;
+    --vscode-symbolIcon-functionForeground: #b180d7;
+    --vscode-symbolIcon-variableForeground: #75beff;
+    --vscode-symbolIcon-constantForeground: #bbbebf;
+    --vscode-symbolIcon-stringForeground: #bbbebf;
+    --vscode-symbolIcon-numberForeground: #bbbebf;
+    --vscode-symbolIcon-booleanForeground: #bbbebf;
+    --vscode-symbolIcon-arrayForeground: #bbbebf;
+    --vscode-symbolIcon-objectForeground: #bbbebf;
+    --vscode-symbolIcon-keyForeground: #bbbebf;
+    --vscode-symbolIcon-nullForeground: #bbbebf;
+    --vscode-symbolIcon-enumeratorMemberForeground: #75beff;
+    --vscode-symbolIcon-structForeground: #bbbebf;
+    --vscode-symbolIcon-eventForeground: #ee9d28;
+    --vscode-symbolIcon-operatorForeground: #bbbebf;
+    --vscode-symbolIcon-typeParameterForeground: #bbbebf;
 
     /* 工具栏（platform/theme/common/colors/editorColors.ts toolbar.hoverBackground dark = #5a5d5e50；
        actionBar.toggledBackground 见 2026-dark.json） */
@@ -205,7 +303,9 @@
     --vscode-panelHeader-height: 35px;
     --vscode-sash-size: 4px;
     --vscode-sash-hover-size: 4px;
-    /* 立面阴影（对齐 workbench/browser/media/style.css 的 .monaco-workbench 设计 token） */
+    /* 立面阴影（对齐 workbench/browser/media/style.css 的 .monaco-workbench 设计 token；
+       shadow-xl 是快速输入浮层的抬升阴影 —— quickInput.css:13） */
     --vscode-shadow-sm: 0 0 4px rgba(0, 0, 0, 0.08);
+    --vscode-shadow-xl: 0 0 20px rgba(0, 0, 0, 0.15);
     --vscode-shadow-active-tab: 0 8px 12px rgba(0, 0, 0, 0.02);
 }

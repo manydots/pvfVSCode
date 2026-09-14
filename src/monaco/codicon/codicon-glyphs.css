@@ -91,6 +91,10 @@
 .codicon-circle-filled::before {
     content: "\ea71";
 }
+/* 命令中心分组之间的分隔圆点（titlebar/commandCenterControl.ts:245 的 Codicon.circleSmallFilled） */
+.codicon-circle-small-filled::before {
+    content: "\eb8a";
+}
 .codicon-close-dirty::before {
     content: "\ea71";
 }
@@ -216,4 +220,82 @@
 }
 .codicon-run::before {
     content: "\eb2c";
+}
+
+/* 文档符号（面包屑符号段）：id 取自 monaco 的 SymbolKinds.toIcon
+ * （editor/common/languages.js:346-386），码位取自 codiconsLibrary.js 的同名 register。 */
+.codicon-symbol-array::before {
+    content: "\ea8a";
+}
+.codicon-symbol-boolean::before {
+    content: "\ea8f";
+}
+.codicon-symbol-class::before {
+    content: "\eb5b";
+}
+.codicon-symbol-constant::before {
+    content: "\eb5d";
+}
+.codicon-symbol-constructor::before {
+    content: "\ea8c";
+}
+.codicon-symbol-enum::before {
+    content: "\ea95";
+}
+.codicon-symbol-enum-member::before {
+    content: "\eb5e";
+}
+.codicon-symbol-event::before {
+    content: "\ea86";
+}
+.codicon-symbol-field::before {
+    content: "\eb5f";
+}
+.codicon-symbol-function::before {
+    content: "\ea8c";
+}
+.codicon-symbol-interface::before {
+    content: "\eb61";
+}
+.codicon-symbol-key::before {
+    content: "\ea93";
+}
+.codicon-symbol-method::before {
+    content: "\ea8c";
+}
+.codicon-symbol-module::before {
+    content: "\ea8b";
+}
+.codicon-symbol-namespace::before {
+    content: "\ea8b";
+}
+.codicon-symbol-null::before {
+    content: "\ea8f";
+}
+.codicon-symbol-number::before {
+    content: "\ea90";
+}
+.codicon-symbol-object::before {
+    content: "\ea8b";
+}
+.codicon-symbol-operator::before {
+    content: "\eb64";
+}
+.codicon-symbol-package::before {
+    content: "\ea8b";
+}
+.codicon-symbol-property::before {
+    content: "\eb65";
+}
+.codicon-symbol-string::before {
+    content: "\eb8d";
+}
+.codicon-symbol-struct::before {
+    content: "\ea91";
+}
+.codicon-symbol-type-parameter::before {
+    content: "\ea92";
+}
+.codicon-symbol-variable::before {
+    content: "\ea88";
 }

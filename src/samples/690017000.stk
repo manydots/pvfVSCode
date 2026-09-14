@@ -1,0 +1,42 @@
+
+[name]
+`黑鉆貴族 (1天)`	
+[name2]
+`Black drill aristocrat`	
+[explain]
+`    使用後， 可以開通黑鑽貴族1天。
+特權介紹：
+1.返回城鎮無虛弱模式
+2.疲勞值上限 + 32點
+3.通關翻牌獎勵增加1次
+4.背包負重 + 20%%
+5.遊戲所得經驗值 + 5%%
+6.獨享黑鑽專屬貴族標志`	
+[flavor text]
+`購買后，切換角色刷新，适用于帳號上的所有角色。`	
+[grade]
+1	
+[attach type]
+`[trade]`	
+[rarity]
+2	
+[usable job]
+`[all]`	
+[/usable job]
+
+[minimum level]
+1	
+[icon]
+`Item/Title/title_cn.img`	49	
+[stackable type]
+`[booster]`	0	
+[booster info]
+
+[cera]
+1	3017951	1000	1	
+[/cera]
+
+[/booster info]
+
+[move wav]
+`BONE_TOUCH`	

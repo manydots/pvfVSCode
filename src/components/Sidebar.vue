@@ -9,6 +9,9 @@ import { appState } from "@/menu/appState.js";
 import { executeCommand } from "@/menu/commands.js";
 import Codicon from "@/components/Codicon.vue";
 import Sash from "@/base/sash/Sash.vue";
+// 宽度约束与复位值见 workbench/browser/partDimensions.js（各取值的权威出处写在该文件里）；
+// 拖拽与「启动恢复已存宽度」共用同一份夹取规则。
+import { SIDEBAR_MIN_WIDTH, SIDEBAR_PREFERRED_WIDTH, clampSidebarWidth, maxSidebarWidth } from "@/workbench/browser/partDimensions.js";
 
 const container = computed(() => getActiveViewContainer());
 const views = computed(() => getViews(container.value));
@@ -27,26 +30,9 @@ function runTitleAction(action) {
     else action.run?.();
 }
 
-// 宽度约束与复位值均取自权威源码：
-//   最小宽度 170（sidebarPart.ts:48 SidebarPart.minimumWidth）；
-//   最大宽度受同排的活动栏 48（activitybarPart.ts:50 ACTIVITYBAR_WIDTH）
-//   与编辑器最小宽度 220（editor.ts:29 DEFAULT_EDITOR_MIN_DIMENSIONS.width）约束
-//   —— 对应 grid 把整排 view 撑满容器、各 view 不小于自身 minimumSize 的布局规则
-//   （sidebarPart.ts:49 maximumWidth = Infinity 由 grid 兜底）；
-//   双击复位到 preferredWidth = Math.max(getOptimalWidth(), 300)（sidebarPart.ts:56-69）,
-//   本仓库没有 getOptimalWidth，取该表达式下限 300。
-const MIN_WIDTH = 170;
-const PREFERRED_WIDTH = 300;
-const ACTIVITY_BAR_WIDTH = 48;
-const EDITOR_MIN_WIDTH = 220;
-
-function maxWidth() {
-    return Math.max(MIN_WIDTH, window.innerWidth - ACTIVITY_BAR_WIDTH - EDITOR_MIN_WIDTH);
-}
-
 const sashState = computed(() => {
-    if (appState.sidebarWidth <= MIN_WIDTH) return "minimum";
-    if (appState.sidebarWidth >= maxWidth()) return "maximum";
+    if (appState.sidebarWidth <= SIDEBAR_MIN_WIDTH) return "minimum";
+    if (appState.sidebarWidth >= maxSidebarWidth(window.innerWidth)) return "maximum";
     return "enabled";
 });
 
@@ -59,7 +45,7 @@ function onSashStart(event) {
 function onSashChange(event) {
     if (!dragStart) return;
     const next = dragStart.width + (event.currentX - dragStart.x);
-    appState.sidebarWidth = Math.min(maxWidth(), Math.max(MIN_WIDTH, next));
+    appState.sidebarWidth = clampSidebarWidth(next, window.innerWidth);
 }
 
 function onSashEnd() {
@@ -67,7 +53,7 @@ function onSashEnd() {
 }
 
 function onSashReset() {
-    appState.sidebarWidth = PREFERRED_WIDTH;
+    appState.sidebarWidth = SIDEBAR_PREFERRED_WIDTH;
 }
 </script>
 

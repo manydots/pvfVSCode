@@ -6,6 +6,7 @@ import * as monaco from "monaco-editor";
 import editorWorker from "monaco-editor/editor/editor.worker?worker";
 import "@/monaco/codicon/codicon.css";
 import "@/monaco/codicon/codicon-glyphs.css";
+import { PVF_DARK_THEME } from "@/monaco/theme.js";
 
 self.MonacoEnvironment = {
     getWorker() {
@@ -15,25 +16,7 @@ self.MonacoEnvironment = {
 
 // Dark 2026 的编辑器配色（与 styles/theme.css 同源：2026-dark.json 覆盖
 // dark_modern.json 继承链，即 VS Code 当前默认深色主题），作为裁剪版客户端的默认主题。
-monaco.editor.defineTheme("pvf-dark", {
-    base: "vs-dark",
-    inherit: true,
-    rules: [],
-    colors: {
-        "editor.background": "#121314",
-        "editor.foreground": "#bbbebf",
-        "editorLineNumber.foreground": "#858889",
-        "editorLineNumber.activeForeground": "#bbbebf",
-        "editor.selectionBackground": "#276782dd",
-        "editor.inactiveSelectionBackground": "#27678260",
-        "editor.selectionHighlightBackground": "#27678260",
-        "editor.lineHighlightBackground": "#242526",
-        "editorCursor.foreground": "#bbbebf",
-        "editor.findMatchBackground": "#27678290",
-        "editor.findMatchHighlightBackground": "#27678280",
-        "editorWidget.background": "#202122",
-        "editorWidget.border": "#2a2b2c"
-    }
-});
+// 颜色与 token 规则的取值出处见 @/monaco/theme.js。
+monaco.editor.defineTheme("pvf-dark", PVF_DARK_THEME);
 
 export { monaco };

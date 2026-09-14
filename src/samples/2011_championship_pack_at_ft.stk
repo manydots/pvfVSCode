@@ -1,0 +1,69 @@
+
+[name]
+`2011格鬥大賽裝扮自選禮盒 (男格鬥)`	
+[explain]
+`    裏面有專門為第四屆全國格鬥大賽優勝者准備的裝扮， 趕快換上試試吧！    `	
+[flavor text]
+`第四屆全國格鬥大賽`	
+[grade]
+1	
+[attach type]
+`[trade]`	
+[rarity]
+2	
+[weight]
+1	
+[usable job]
+`[at fighter]`	
+[/usable job]
+
+[suitable job]
+`[at fighter]`	
+[/suitable job]
+
+[minimum level]
+1	
+[icon]
+`Item/stackable/consumption.img`	186	
+[icon mark]
+`Item/IconMark.img`	36	
+[stack limit]
+1000	
+[cool time]
+1000	
+[stackable type]
+`[booster selection]`	0	
+[booster category num]
+1	3	
+[booster selection num]
+0	
+[booster select category]
+0	0	
+[avatar]
+2741753	1	4	0	2742055	1	4	0	2742156	1	4	0	2742257	1	4	0	2742358	1	4	0	2742459	1	4	0	
+[/avatar]
+
+[/booster select category]
+
+[booster select category]
+1	0	
+[avatar]
+2741754	1	4	0	2742056	1	4	0	2742157	1	4	0	2742258	1	4	0	2742359	1	4	0	2742460	1	4	0	
+[/avatar]
+
+[/booster select category]
+
+[booster select category]
+2	0	
+[avatar]
+2741755	1	4	0	2742057	1	4	0	2742158	1	4	0	2742259	1	4	0	2742360	1	4	0	2742461	1	4	0	
+[/avatar]
+
+[/booster select category]
+
+[booster category name]
+`請選擇套裝`	`2011格鬥冠軍裝扮(男格鬥)`	`2011格鬥亞軍裝扮(男格鬥)`	`2011格鬥季軍裝扮(男格鬥)`	
+[/booster category name]
+
+[move wav]
+`BONE_TOUCH`	

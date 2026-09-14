@@ -201,6 +201,17 @@ watch(
     () => props.entries,
     () => {
         clearTimers();
+        // 父条目列表被换掉（宿主按上下文键重算了菜单）时，已展开的子菜单就地刷新内容，
+        // 而不是收起：子菜单里的 checked / enabled 同样按上下文键求值（如「切换缩略图」的
+        // 勾选态），收起会让展开中的子菜单永远停在旧状态上。
+        if (submenuIndex.value >= 0) {
+            const entry = props.entries[submenuIndex.value];
+            const children = entry?.isSubmenu && props.submenuResolver ? (props.submenuResolver(entry) ?? []) : [];
+            if (children.length > 0) {
+                submenuEntries.value = children;
+                return;
+            }
+        }
         submenuIndex.value = -1;
         submenuEntries.value = [];
         focusedIndex.value = -1;
@@ -269,6 +280,16 @@ defineExpose({ focus, getRootElement: () => rootEl.value });
     box-shadow: var(--vscode-shadow-lg);
     overflow: hidden;
     user-select: none;
+    /* menu.ts:1251-1258 的 .context-view.monaco-menu-container { outline: 0; border: none }：
+       容器是 tabindex=-1 的聚焦落点（Menu 渲染后立即 focus 它），若不抑制，浏览器会给它画出
+       默认焦点环（白 + 蓝双色 outline）。 */
+    outline: 0;
+}
+
+/* menu.ts:1262-1266：容器内的一切 :focus（含垂直 action bar）都不带 outline ——
+   条目自身的键盘选中态由 .action-item.keyboard 的 menu.selectionBorder 表达。 */
+.menu-panel :focus {
+    outline: 0;
 }
 
 /* .monaco-menu：字体与描边（getMenuWidgetCSS 开头） */
